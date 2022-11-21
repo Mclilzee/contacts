@@ -57,5 +57,4 @@ class PhoneBookTest {
         );
         assertEquals(expected, phoneBook.getRecordsInformation());
     }
-
 }

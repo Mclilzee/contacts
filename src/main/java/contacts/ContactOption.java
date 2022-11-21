@@ -50,10 +50,7 @@ public class ContactOption {
     }
 
     public void printRecordsList() {
-        List<Contact> contacts = phoneBook.getContacts();
-        IntStream.range(0, contacts.size())
-                .mapToObj(index -> (index + 1) + ". " + contacts.get(index))
-                .forEach(System.out::println);
+        phoneBook.getRecordsInformation().forEach(System.out::println);
     }
 
     public void editRecordsInstructions() {
