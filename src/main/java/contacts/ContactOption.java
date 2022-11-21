@@ -1,38 +1,67 @@
 package contacts;
 
-import contacts.Contact;
-import contacts.PhoneBook;
-
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class ContactOption {
 
     private final Scanner scanner;
-    private final PhoneBook phoneBook;
+    private final PhoneBook phoneBook = new PhoneBook();
 
     public ContactOption(Scanner scanner) {
         this.scanner = scanner;
-        phoneBook = new PhoneBook(scanner);
     }
 
     public void start() {
-       while (true) {
-           printInstructions();
-           switch (scanner.nextLine().toLowerCase()) {
-               case "exit":
-                   return;
-               case "count":
-                   phoneBook.printRecordsCount();
-                   break;
-               case "add":
-                   phoneBook.addNewContact();
-                   break;
-           }
-       }
+        while (true) {
+            printInstructions();
+            switch (scanner.nextLine().toLowerCase()) {
+                case "exit":
+                    return;
+                case "count":
+                    printRecordsCount();
+                    break;
+                case "add":
+                    addNewContact();
+                    break;
+            }
+        }
     }
 
-    private void printInstructions() {
+    public void printInstructions() {
         System.out.print("Enter action (add, remove, edit, count, list, exit): ");
     }
 
+    public void addNewContact() {
+        System.out.print("Enter the name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter the surname: ");
+        String surname = scanner.nextLine();
+
+        System.out.print("Enter the number: ");
+        String number = scanner.nextLine();
+
+        phoneBook.addContact(new Contact(name, surname, number));
+        System.out.println("The record added.");
+    }
+
+    public void printRecordsCount() {
+        System.out.println("The Phone Book has " + phoneBook.getContacts().size() + " records.");
+    }
+
+    public void printRecordsList() {
+        List<Contact> contacts = phoneBook.getContacts();
+        IntStream.range(0, contacts.size())
+                .mapToObj(index -> (index + 1) + ". " + contacts.get(index))
+                .forEach(System.out::println);
+    }
+
+    public void editRecords() {
+        if (phoneBook.getContacts().isEmpty()) {
+            System.out.println("No records to edit!");
+            return;
+        }
+    }
 }

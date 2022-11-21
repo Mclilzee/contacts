@@ -44,7 +44,7 @@ public class Contact {
         }
     }
 
-    public static boolean isValidPhoneNumber(String phoneNumber) {
+    private static boolean isValidPhoneNumber(String phoneNumber) {
         if (phoneNumber == null) {
             return false;
         }
