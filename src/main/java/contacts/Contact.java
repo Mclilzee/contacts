@@ -1,10 +1,11 @@
 package contacts;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.regex.Pattern;
 
-@Getter
+@Getter @Setter
 public class Contact {
 
     private static final Pattern pattern;

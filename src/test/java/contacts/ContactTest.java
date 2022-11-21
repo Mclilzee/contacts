@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ContactTest {
 
+    private final String WRONG_NUMBER_OUTPUT = "Wrong number format!\r\n";
+    private final Contact contact = new Contact("John", "Doe", "+0 (123) 456-789-ABcd");
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     @BeforeEach
@@ -19,21 +21,18 @@ class ContactTest {
 
     @Test
     void getName() {
-        Contact contact = new Contact("John", "Doe", "+0 (123) 456-789-ABcd");
         String expected = "John";
         assertEquals(expected, contact.getName());
     }
 
     @Test
     void getSurname() {
-        Contact contact = new Contact("John", "Doe", "+0 (123) 456-789-ABcd");
         String expected = "Doe";
         assertEquals(expected, contact.getSurname());
     }
 
     @Test
     void correctPhoneNumber() {
-        Contact contact = new Contact("John", "Doe", "+0 (123) 456-789-ABcd");
         String expected = "+0 (123) 456-789-ABcd";
         assertEquals(expected, contact.getPhoneNumber());
     }
@@ -41,14 +40,19 @@ class ContactTest {
     @Test
     void wrongPhoneNumber() {
         Contact contact = new Contact("John", "Doe", "+0(123)1234123");
-        String expected = "";
+        String expected = "[no number]";
         assertEquals(expected, contact.getPhoneNumber());
     }
 
     @Test
-    void testOutput() {
+    void testInitOutput() {
         Contact contact = new Contact("John", "Doe", "+0(123)1234123");
-        String expected = "Wrong phone number!\r\n";
-        assertEquals(expected, outputStreamCaptor.toString());
+        assertEquals(WRONG_NUMBER_OUTPUT, outputStreamCaptor.toString());
+    }
+
+    @Test
+    void setterWrongPhoneNumberOutput() {
+        contact.setPhoneNumber("+0(123)12345123");
+        assertEquals(WRONG_NUMBER_OUTPUT, outputStreamCaptor.toString());
     }
 }
