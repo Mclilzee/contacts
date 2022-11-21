@@ -14,7 +14,7 @@ public class Contact {
         String firstGroupWrapped = "(\\([\\da-z]+\\)[\\s-][\\da-z]{2,})";
         String secondGroupWrapped = "([\\da-z]+[\\s-]\\([\\da-z]{2,}\\))";
         String bothGroupsUnwrapped = "([\\da-z]+[\\s-][\\da-z]{2,})";
-        String fullRegex =  String.format("\\+?([\\da-z]+|(%s|%s|%s)([\\s-][\\da-z]+)+)", firstGroupWrapped, secondGroupWrapped, bothGroupsUnwrapped);
+        String fullRegex =  String.format("\\+?\\(?[\\da-z]+\\)?|(%s|%s|%s)([\\s-][\\da-z]{2,})*", firstGroupWrapped, secondGroupWrapped, bothGroupsUnwrapped);
         pattern = Pattern.compile(fullRegex, Pattern.CASE_INSENSITIVE);
     }
 
