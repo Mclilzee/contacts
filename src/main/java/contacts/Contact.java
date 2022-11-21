@@ -18,8 +18,8 @@ public class Contact {
         pattern = Pattern.compile(fullRegex, Pattern.CASE_INSENSITIVE);
     }
 
-    private final String name;
-    private final String surname;
+    private String name;
+    private String surname;
     private String phoneNumber;
 
 
@@ -56,4 +56,5 @@ public class Contact {
     public String toString() {
         return name + " " + surname + ", " + phoneNumber;
     }
+
 }

@@ -29,14 +29,23 @@ class ContactTest {
     }
 
     @Test
+    void setName() {
+        contact.setName("Mona");
+        String expected = "Mona";
+        assertEquals(expected, contact.getName());
+    }
+
+    @Test
     void getSurname() {
         String expected = "Doe";
         assertEquals(expected, contact.getSurname());
     }
 
     @Test
-    void setName() {
-
+    void setSurname() {
+        contact.setSurname("Dogman");
+        String expected = "Dogman";
+        assertEquals(expected, contact.getSurname());
     }
 
     @ParameterizedTest
