@@ -38,4 +38,8 @@ public class PhoneBook {
     public void setPhoneNumber(int i, String phoneNumber) {
         contacts.get(i).setPhoneNumber(phoneNumber);
     }
+
+    public void removeRecord(int index) {
+        contacts.remove(index);
+    }
 }

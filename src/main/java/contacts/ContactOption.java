@@ -1,8 +1,6 @@
 package contacts;
 
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
 public class ContactOption {
 
@@ -75,6 +73,18 @@ public class ContactOption {
             case "number" -> phoneBook.setPhoneNumber(index, field);
             default -> throw new IllegalArgumentException();
         }
+    }
+
+    private void removeRecord() {
+        if (phoneBook.getContacts().isEmpty()) {
+            System.out.println("No records to edit!");
+            return;
+        }
+
+        printRecordsList();
+        int index = Integer.parseInt(getInput("Select a record: ")) - 1;
+        phoneBook.removeRecord(index);
+        System.out.println("The record removed!");
     }
 
     private String getInput(String message) {
