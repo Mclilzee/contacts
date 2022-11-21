@@ -1,7 +1,5 @@
 package contacts;
 
-import contacts.options.ContactOption;
-
 import java.util.Scanner;
 
 public class ContactsApplication {

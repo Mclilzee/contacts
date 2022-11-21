@@ -14,16 +14,29 @@ public class PhoneBook {
         this.scanner = scanner;
     }
 
-    public void addContact(Contact contact) {
-        if (contact == null) {
-            return;
-        }
-
-        contacts.add(contact);
+    public void addNewContact() {
+        contacts.add(getContactFromInput());
         System.out.println("The record added.");
     }
 
     public List<Contact> getContacts() {
         return contacts;
+    }
+
+    private Contact getContactFromInput() {
+        System.out.print("Enter the name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter the surname: ");
+        String surname = scanner.nextLine();
+
+        System.out.print("Enter the number: ");
+        String number = scanner.nextLine();
+
+        return new Contact(name, surname, number);
+    }
+
+    public void printRecordsCount() {
+        System.out.println("The Phone Book has " + contacts.size() + " records.");
     }
 }
