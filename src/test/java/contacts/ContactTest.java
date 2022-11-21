@@ -88,6 +88,13 @@ class ContactTest {
         assertEquals(WRONG_NUMBER_OUTPUT, outputStreamCaptor.toString());
     }
 
+    @Test
+    void returnCorrectString() {
+        Contact contact = new Contact("John", "Doe", "+0 (123) 456-789-ABcd");
+        String expected = "John Doe, +0 (123) 456-789-ABcd";
+        assertEquals(expected, contact.toString());
+    }
+
     private static Stream<String> provideWrongNumbers() {
         return Stream.of(
                 "+0(123)1234512)",

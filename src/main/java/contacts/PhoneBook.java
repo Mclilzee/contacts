@@ -3,6 +3,7 @@ package contacts;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class PhoneBook {
 
@@ -41,6 +42,8 @@ public class PhoneBook {
     }
 
     public void printRecordsList() {
-        System.out.println("");
+        IntStream.range(0, contacts.size())
+                .mapToObj(index -> (index + 1) + ". " + contacts.get(index))
+                .forEach(System.out::println);
     }
 }

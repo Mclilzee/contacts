@@ -86,6 +86,23 @@ class PhoneBookTest {
         PhoneBook phoneBook = new PhoneBook(scanner);
         phoneBook.printRecordsList();
 
-        assertEquals("\r\n", outputStream.toString());
+        assertEquals("", outputStream.toString());
+    }
+
+    @Test
+    void printCorrectListInformationForContactWithBooks() {
+        Scanner scanner = new Scanner(firstContactInformation + secondContactInformation + thirdContactInformation);
+        PhoneBook phoneBook = new PhoneBook(scanner);
+        phoneBook.addNewContact();
+        phoneBook.addNewContact();
+        phoneBook.addNewContact();
+
+        outputStream.reset();
+        phoneBook.printRecordsList();
+        String expected = "1. John Doe, +0 (123) 12345\r\n" +
+                "2. Mark Dobless, +0 (123) 12345\r\n" +
+                "3. Emad Doblos, +0 (123) 12345\r\n";
+
+        assertEquals(expected, outputStream.toString());
     }
 }

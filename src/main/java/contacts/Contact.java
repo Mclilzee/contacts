@@ -51,4 +51,9 @@ public class Contact {
 
         return pattern.matcher(phoneNumber).matches();
     }
+
+    @Override
+    public String toString() {
+        return name + " " + surname + ", " + phoneNumber;
+    }
 }
