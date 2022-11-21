@@ -32,7 +32,7 @@ public class Contact {
             this.phoneNumber = phoneNumber;
         } else {
             this.phoneNumber = "[no number]";
-            System.out.println("Wrong phone number!");
+            System.out.println("Wrong number format!");
         }
     }
 
@@ -40,7 +40,7 @@ public class Contact {
         if (isValidPhoneNumber(phoneNumber)) {
             this.phoneNumber = phoneNumber;
         } else {
-            System.out.println("Wrong phone number!");
+            System.out.println("Wrong number format!");
         }
     }
 
