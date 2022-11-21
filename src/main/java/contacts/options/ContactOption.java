@@ -14,7 +14,7 @@ public class ContactOption {
         this.scanner = scanner;
     }
 
-    public void createContacts() {
+    public void start() {
         System.out.println("Enter the name of the person:");
         String name = scanner.nextLine();
 

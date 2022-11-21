@@ -6,11 +6,17 @@ import java.util.Scanner;
 
 @Component
 public class MainOption {
-    Scanner scanner;
 
-    public MainOption(Scanner scanner) {
+    private final Scanner scanner;
+
+    private final ContactOption contactOption;
+
+    public MainOption(Scanner scanner, ContactOption contactOption) {
         this.scanner = scanner;
+        this.contactOption = contactOption;
     }
+
     public void start() {
+        contactOption.start();
     }
 }
