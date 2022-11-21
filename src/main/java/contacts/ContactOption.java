@@ -20,6 +20,9 @@ public class ContactOption {
                 case "count":
                     printRecordsCount();
                     break;
+                case "list":
+                    printRecordsList();
+                    break;
                 case "add":
                     addNewContact();
                     break;
@@ -30,31 +33,31 @@ public class ContactOption {
         }
     }
 
-    public void printInstructions() {
+    private void printInstructions() {
         System.out.print("Enter action (add, remove, edit, count, list, exit): ");
     }
 
-    public void addNewContact() {
+    private void addNewContact() {
         String name = getInput("Enter the name: ");
         String surname = getInput("Enter the surname: ");
         String number = getInput("Enter the number: ");
 
         try {
             phoneBook.addContact(new Contact(name, surname, number));
-        } catch (IllegalArgumentException ignored) {
             System.out.println("The record added.");
+        } catch (IllegalArgumentException ignored) {
         }
     }
 
-    public void printRecordsCount() {
+    private void printRecordsCount() {
         System.out.println("The Phone Book has " + phoneBook.getContacts().size() + " records.");
     }
 
-    public void printRecordsList() {
+    private void printRecordsList() {
         phoneBook.getRecordsInformation().forEach(System.out::println);
     }
 
-    public void editRecordsInstructions() {
+    private void editRecordsInstructions() {
         if (phoneBook.getContacts().isEmpty()) {
             System.out.println("No records to edit!");
             return;
@@ -66,13 +69,28 @@ public class ContactOption {
         editRecord(index, field);
     }
 
-    public void editRecord(int index, String field) {
-        switch (field) {
-            case "name" -> phoneBook.setName(index, field);
-            case "surname" -> phoneBook.setSurname(index, field);
-            case "number" -> phoneBook.setPhoneNumber(index, field);
+    private void editRecord(int index, String field) {
+        switch (field.toLowerCase()) {
+            case "name" -> editRecordName(index);
+            case "surname" -> editSurname(index);
+            case "number" -> editRecordNumber(index);
             default -> throw new IllegalArgumentException();
         }
+    }
+
+    private void editRecordNumber(int index) {
+        String phoneNumber = getInput("Enter number: ");
+        phoneBook.setPhoneNumber(index, phoneNumber);
+    }
+
+    private void editSurname(int index) {
+        String surname = getInput("Enter surname: ");
+        phoneBook.setSurname(index, surname);
+    }
+
+    private void editRecordName(int index) {
+        String name = getInput("Enter name: ");
+        phoneBook.setName(index, name);
     }
 
     private void removeRecord() {
@@ -88,7 +106,7 @@ public class ContactOption {
     }
 
     private String getInput(String message) {
-        System.out.println(message);
+        System.out.print(message);
         return scanner.nextLine();
     }
 }
