@@ -1,7 +1,10 @@
 package contacts;
 
+import lombok.Getter;
+
 import java.util.regex.Pattern;
 
+@Getter
 public class Contact {
 
     private final String name;
