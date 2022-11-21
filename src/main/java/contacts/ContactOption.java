@@ -81,16 +81,19 @@ public class ContactOption {
     private void editRecordNumber(int index) {
         String phoneNumber = getInput("Enter number: ");
         phoneBook.setPhoneNumber(index, phoneNumber);
+        printUpdatedMessage();
     }
 
     private void editSurname(int index) {
         String surname = getInput("Enter surname: ");
         phoneBook.setSurname(index, surname);
+        printUpdatedMessage();
     }
 
     private void editRecordName(int index) {
         String name = getInput("Enter name: ");
         phoneBook.setName(index, name);
+        printUpdatedMessage();
     }
 
     private void removeRecord() {
@@ -108,5 +111,9 @@ public class ContactOption {
     private String getInput(String message) {
         System.out.print(message);
         return scanner.nextLine();
+    }
+
+    private void printUpdatedMessage() {
+        System.out.println("The record updated!");
     }
 }
