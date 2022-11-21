@@ -29,6 +29,9 @@ public class ContactOption {
                 case "edit":
                     editRecordsInstructions();
                     break;
+                case "remove":
+                    removeRecord();
+                    break;
             }
         }
     }

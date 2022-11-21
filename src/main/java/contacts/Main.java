@@ -2,7 +2,7 @@ package contacts;
 
 import java.util.Scanner;
 
-public class ContactsApplication {
+public class Main {
 
     private static final ContactOption contactOption = new ContactOption(new Scanner(System.in));
 
