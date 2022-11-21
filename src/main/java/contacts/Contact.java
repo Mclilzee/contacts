@@ -18,7 +18,7 @@ public class Contact {
             this.phoneNumber = phoneNumber;
         } else {
             this.phoneNumber = "";
-            System.out.println("Wrong phone number");
+            System.out.println("Wrong phone number!");
         }
     }
 }

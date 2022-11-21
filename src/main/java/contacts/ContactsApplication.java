@@ -1,6 +1,5 @@
 package contacts;
 
-import contacts.options.ContactOption;
 import contacts.options.MainOption;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

@@ -1,6 +1,5 @@
 package contacts;
 
-import lombok.Getter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,36 +10,45 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ContactTest {
 
-    private final Contact contact = new Contact("John", "Doe", "+0 (123) 456-789-ABcd");
-    private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     @BeforeEach
     void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
     }
+
     @Test
     void getName() {
+        Contact contact = new Contact("John", "Doe", "+0 (123) 456-789-ABcd");
         String expected = "John";
         assertEquals(expected, contact.getName());
     }
 
     @Test
     void getSurname() {
+        Contact contact = new Contact("John", "Doe", "+0 (123) 456-789-ABcd");
         String expected = "Doe";
         assertEquals(expected, contact.getSurname());
     }
 
     @Test
-    void getPhoneNumber() {
+    void correctPhoneNumber() {
+        Contact contact = new Contact("John", "Doe", "+0 (123) 456-789-ABcd");
         String expected = "+0 (123) 456-789-ABcd";
         assertEquals(expected, contact.getPhoneNumber());
     }
 
     @Test
+    void wrongPhoneNumber() {
+        Contact contact = new Contact("John", "Doe", "+0(123)1234123");
+        String expected = "";
+        assertEquals(expected, contact.getPhoneNumber());
+    }
+
+    @Test
     void testOutput() {
-        String expected = "Wrong phone number!";
-        System.out.println("something");
+        Contact contact = new Contact("John", "Doe", "+0(123)1234123");
+        String expected = "Wrong phone number!\r\n";
         assertEquals(expected, outputStreamCaptor.toString());
     }
 }
