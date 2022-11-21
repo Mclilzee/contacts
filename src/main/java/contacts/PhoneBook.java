@@ -1,6 +1,7 @@
 package contacts;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PhoneBook {
@@ -16,7 +17,10 @@ public class PhoneBook {
     }
 
     public List<Contact> getContacts() {
-        return contacts;
+        return Collections.unmodifiableList(contacts);
     }
 
+    public List<String> getRecordsInformation() {
+        return List.of();
+    }
 }

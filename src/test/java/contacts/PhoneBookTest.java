@@ -1,12 +1,9 @@
 package contacts;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.util.Scanner;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -17,6 +14,11 @@ class PhoneBookTest {
     private final Contact firstContact = new Contact("John", "Doe", "+0 (123) 12345");
     private final Contact secondContact = new Contact("Mark", "Dobless", "+0 (123) 12345");
     private final Contact thirdContact = new Contact("Emad", "Doblos", "+0 (123) 12345");
+
+    @Test
+    void getListReturnsUnmodifiable() {
+        assertThrows(UnsupportedOperationException.class, () -> phoneBook.getContacts().add(firstContact));
+    }
 
     @Test
     void addContact() {
@@ -36,4 +38,21 @@ class PhoneBookTest {
     void addingNullContactThrows() {
         assertThrows(IllegalArgumentException.class, () -> phoneBook.addContact(null));
     }
+
+    @Test
+    @DisplayName("Records list information returns empty list, when no records exist")
+    void recordListInformationEmpty() {
+        List<String> expected = List.of();
+        assertEquals(expected, phoneBook.getRecordsInformation());
+    }
+
+    @Test
+    void recordListInformationCorrectListReturned() {
+        List<String> expected = List.of(
+                "1. John Doe, +0 (123) 12345",
+                "2. Mark Dobless, +0 (123) 12345"
+        );
+        assertEquals(expected, phoneBook.getRecordsInformation());
+    }
+
 }
