@@ -101,7 +101,7 @@ public class ContactOption {
 
     private void removeRecord() {
         if (phoneBook.getContacts().isEmpty()) {
-            System.out.println("No records to edit!");
+            System.out.println("No records to remove!");
             return;
         }
 
