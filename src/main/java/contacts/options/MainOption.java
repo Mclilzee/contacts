@@ -1,10 +1,7 @@
 package contacts.options;
 
-import org.springframework.stereotype.Component;
-
 import java.util.Scanner;
 
-@Component
 public class MainOption {
 
     private final Scanner scanner;

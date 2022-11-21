@@ -1,25 +1,16 @@
 package contacts;
 
-import contacts.options.MainOption;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import contacts.options.ContactOption;
 
-@SpringBootApplication
-public class ContactsApplication implements CommandLineRunner {
+import java.util.Scanner;
 
-    private final MainOption mainOption;
+public class ContactsApplication {
 
-    public ContactsApplication(MainOption mainOption) {
-        this.mainOption = mainOption;
-    }
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final ContactOption contactOption = new ContactOption(scanner);
 
     public static void main(String[] args) {
-        SpringApplication.run(ContactsApplication.class, args);
+        contactOption.start();
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-        mainOption.start();
-    }
 }
