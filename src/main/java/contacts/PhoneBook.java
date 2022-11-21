@@ -39,4 +39,8 @@ public class PhoneBook {
     public void printRecordsCount() {
         System.out.println("The Phone Book has " + contacts.size() + " records.");
     }
+
+    public void printRecordsList() {
+        System.out.println("");
+    }
 }

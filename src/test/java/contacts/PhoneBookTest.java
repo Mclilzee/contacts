@@ -79,4 +79,13 @@ class PhoneBookTest {
         String expected = "The Phone Book has 0 records.\r\n";
         assertEquals(expected, outputStream.toString());
     }
+
+    @Test
+    void printListInformation() {
+        Scanner scanner = new Scanner("");
+        PhoneBook phoneBook = new PhoneBook(scanner);
+        phoneBook.printRecordsList();
+
+        assertEquals("\r\n", outputStream.toString());
+    }
 }
