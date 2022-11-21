@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class MainOption {
 
     private final Scanner scanner;
-
     private final ContactOption contactOption;
 
     public MainOption(Scanner scanner, ContactOption contactOption) {
