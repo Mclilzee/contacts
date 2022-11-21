@@ -58,10 +58,34 @@ public class ContactOption {
                 .forEach(System.out::println);
     }
 
-    public void editRecords() {
+    public void editRecordsInstructions() {
         if (phoneBook.getContacts().isEmpty()) {
             System.out.println("No records to edit!");
             return;
+        }
+
+        printRecordsList();
+        System.out.print("Select a record: ");
+        int index = scanner.nextInt() - 1;
+
+        processRecordEditInstructions(index);
+    }
+
+    public void processRecordEditInstructions(int index) {
+        System.out.print("Select a field (name, surname, number): ");
+        String input = scanner.nextLine();
+
+        editRecord(index, input);
+    }
+
+    public void editRecord(int index, String field) {
+        switch (field) {
+            case "name":
+                break;
+            case "surname":
+                break;
+            case "number":
+                break;
         }
     }
 }

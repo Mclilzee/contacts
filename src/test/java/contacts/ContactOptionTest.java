@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -95,7 +96,7 @@ class ContactOptionTest {
 
     @Test
     void editRecordsShowCorrectMessageIfEmpty() {
-        contactOption.editRecords();
+        contactOption.editRecordsInstructions();
         String expected = "No records to edit!\r\n";
         assertEquals(expected, outputStream.toString());
     }
@@ -104,9 +105,23 @@ class ContactOptionTest {
     void editRecordsWithTwoRecords() {
         Scanner scanner = new Scanner(firstContactInformation + secondContactInformation);
         contactOption = new ContactOption(scanner);
+        contactOption.addNewContact();
+        contactOption.addNewContact();
+        outputStream.reset();
 
-        contactOption.editRecords();
+        try {
+            contactOption.editRecordsInstructions();
+        } catch (NoSuchElementException ignore) {
+
+        }
+
         String expected = "1. John Doe, +0 (123) 12345\r\n" +
                 "2. Mark Dobless, +0 (123) 12345\r\n";
+        assertEquals(expected, outputStream.toString());
+    }
+
+    @Test
+    void testEditName() {
+
     }
 }
