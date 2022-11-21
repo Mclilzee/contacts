@@ -2,9 +2,14 @@ package contacts;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -37,22 +42,37 @@ class ContactTest {
         assertEquals(expected, contact.getPhoneNumber());
     }
 
-    @Test
-    void wrongPhoneNumber() {
-        Contact contact = new Contact("John", "Doe", "+0(123)1234123");
+    @ParameterizedTest
+    @MethodSource("provideWrongNumbers")
+    void wrongPhoneNumber(String number) {
+        Contact contact = new Contact("John", "Doe", number);
         String expected = "[no number]";
         assertEquals(expected, contact.getPhoneNumber());
     }
 
-    @Test
-    void testInitOutput() {
-        Contact contact = new Contact("John", "Doe", "+0(123)1234123");
+
+    @ParameterizedTest
+    @MethodSource("provideWrongNumbers")
+    void testInitOutput(String number) {
+        Contact contact = new Contact("John", "Doe", number);
         assertEquals(WRONG_NUMBER_OUTPUT, outputStreamCaptor.toString());
     }
 
-    @Test
-    void setterWrongPhoneNumberOutput() {
-        contact.setPhoneNumber("+0(123)12345123");
+    @ParameterizedTest
+    @MethodSource("provideWrongNumbers")
+    void setterWrongPhoneNumberOutput(String number) {
+        contact.setPhoneNumber(number);
         assertEquals(WRONG_NUMBER_OUTPUT, outputStreamCaptor.toString());
+        assertEquals("+0 (123) 456-789-ABcd", contact.getPhoneNumber());
+    }
+
+    private static Stream<String> provideWrongNumbers() {
+        return Stream.of(
+                "+0(123)1234512)",
+                null,
+                "+(0) (123) 123-123-123",
+                "+123 0 123-123-321",
+                "+123 (123)1231-123-123"
+        );
     }
 }

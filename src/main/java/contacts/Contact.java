@@ -45,6 +45,10 @@ public class Contact {
     }
 
     public static boolean isValidPhoneNumber(String phoneNumber) {
+        if (phoneNumber == null) {
+            return false;
+        }
+
         return pattern.matcher(phoneNumber).matches();
     }
 }
