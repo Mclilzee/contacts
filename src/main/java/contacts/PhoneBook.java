@@ -26,4 +26,16 @@ public class PhoneBook {
                 .mapToObj(index -> (index + 1) + ". " + contacts.get(index))
                 .toList();
     }
+
+    public void setName(int i, String name) {
+        contacts.get(i).setName(name);
+    }
+
+    public void setSurname(int i, String surname) {
+       contacts.get(i).setSurname(surname);
+    }
+
+    public void setPhoneNumber(int i, String phoneNumber) {
+        contacts.get(i).setPhoneNumber(phoneNumber);
+    }
 }
