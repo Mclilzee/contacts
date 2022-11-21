@@ -124,7 +124,9 @@ class ContactTest {
     private static Stream<String> provideCorrectPhoneNumbers() {
         return Stream.of(
                 "+0 (123) 456-789-ABcd",
-                "(123) 234 345-456"
+                "(123) 234 345-456",
+                "1234",
+                "+12345"
         );
     }
 }
