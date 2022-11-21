@@ -3,6 +3,7 @@ package contacts;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class PhoneBook {
 
@@ -21,6 +22,8 @@ public class PhoneBook {
     }
 
     public List<String> getRecordsInformation() {
-        return List.of();
+        return IntStream.range(0, contacts.size())
+                .mapToObj(index -> (index + 1) + ". " + contacts.get(index))
+                .toList();
     }
 }

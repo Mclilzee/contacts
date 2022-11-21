@@ -48,6 +48,9 @@ class PhoneBookTest {
 
     @Test
     void recordListInformationCorrectListReturned() {
+        phoneBook.addContact(firstContact);
+        phoneBook.addContact(secondContact);
+
         List<String> expected = List.of(
                 "1. John Doe, +0 (123) 12345",
                 "2. Mark Dobless, +0 (123) 12345"
