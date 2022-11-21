@@ -25,6 +25,9 @@ public class ContactOption {
                 case "add":
                     addNewContact();
                     break;
+                case "edit":
+                    editRecordsInstructions();
+                    break;
             }
         }
     }
@@ -61,18 +64,16 @@ public class ContactOption {
 
         printRecordsList();
         int index = Integer.parseInt(getInput("Select a record: ")) - 1;
-        String field = getInput("Select a field (name, surnma, number): ");
+        String field = getInput("Select a field (name, surname, number): ");
         editRecord(index, field);
     }
 
     public void editRecord(int index, String field) {
         switch (field) {
-            case "name":
-                break;
-            case "surname":
-                break;
-            case "number":
-                break;
+            case "name" -> phoneBook.setName(index, field);
+            case "surname" -> phoneBook.setSurname(index, field);
+            case "number" -> phoneBook.setPhoneNumber(index, field);
+            default -> throw new IllegalArgumentException();
         }
     }
 
