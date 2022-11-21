@@ -1,6 +1,7 @@
 package contacts;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import contacts.options.ContactOption;
+import contacts.options.MainOption;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,20 +9,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ContactsApplication implements CommandLineRunner {
 
-    private final CreateContacts createContacts;
+    private final MainOption mainOption;
 
-    public ContactsApplication(CreateContacts createContacts) {
-        this.createContacts = createContacts;
+    public ContactsApplication(MainOption mainOption) {
+        this.mainOption = mainOption;
     }
 
     public static void main(String[] args) {
         SpringApplication.run(ContactsApplication.class, args);
     }
 
-
-
     @Override
     public void run(String... args) throws Exception {
-        createContacts.createContacts();
+        mainOption.start();
     }
 }

@@ -1,15 +1,16 @@
-package contacts;
+package contacts.options;
 
+import contacts.Contact;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
 @Component
-public class CreateContacts {
+public class ContactOption {
 
     private final Scanner scanner;
 
-    public CreateContacts(Scanner scanner) {
+    public ContactOption(Scanner scanner) {
         this.scanner = scanner;
     }
 
