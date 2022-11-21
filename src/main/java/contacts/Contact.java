@@ -1,13 +1,35 @@
 package contacts;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import java.util.regex.Pattern;
 
-@AllArgsConstructor
-@Getter
 public class Contact {
 
-    private String name;
-    private String surname;
-    private String phoneNumber;
+    private final String name;
+    private final String surname;
+    private final String phoneNumber;
+    private final Pattern phoneNumberPattern = createPhoneNumberPattern();
+
+    private Pattern createPhoneNumberPattern() {
+        String firstGroupWrapped = "(\\([\\da-z]+\\)[\\s-][\\da-z]{2,})";
+        String secondGroupWrapped = "([\\da-z]+[\\s-]\\([\\da-z]{2,}\\))";
+        String bothGroupsUnwrapped = "([\\d-z]+[\\s-]\\[\\da-z]{2,})";
+        String fullRegex =  String.format("\\+?(%s|%s|%s)([\\s-][\\da-z])+", firstGroupWrapped, secondGroupWrapped, bothGroupsUnwrapped);
+        return Pattern.compile(fullRegex, Pattern.CASE_INSENSITIVE);
+    }
+
+    public Contact(String name, String surname, String phoneNumber) {
+        this.name = name;
+        this.surname = surname;
+
+        if (isValidPhoneNumber(phoneNumber)) {
+            this.phoneNumber = phoneNumber;
+        } else {
+            this.phoneNumber = "";
+            System.out.println("Wrong phone number");
+        }
+    }
+
+    private boolean isValidPhoneNumber(String phoneNumber) {
+        return phoneNumberPattern.matcher(phoneNumber).matches();
+    }
 }
