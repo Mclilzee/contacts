@@ -8,7 +8,7 @@ public class Contact {
 
     private final String name;
     private final String surname;
-    private final String phoneNumber;
+    private String phoneNumber;
 
     public Contact(String name, String surname, String phoneNumber) {
         this.name = name;
@@ -17,7 +17,15 @@ public class Contact {
         if (StringUtils.isValidPhoneNumber(phoneNumber)) {
             this.phoneNumber = phoneNumber;
         } else {
-            this.phoneNumber = "";
+            this.phoneNumber = "[no number]";
+            System.out.println("Wrong phone number!");
+        }
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        if (StringUtils.isValidPhoneNumber(phoneNumber)) {
+            this.phoneNumber = phoneNumber;
+        } else {
             System.out.println("Wrong phone number!");
         }
     }
