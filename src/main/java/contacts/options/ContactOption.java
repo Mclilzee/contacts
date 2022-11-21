@@ -2,18 +2,17 @@ package contacts.options;
 
 import contacts.Contact;
 import contacts.PhoneBook;
-import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-@Component
 public class ContactOption {
 
     private final Scanner scanner;
-    PhoneBook phoneBook = new PhoneBook();
+    private final PhoneBook phoneBook;
 
     public ContactOption(Scanner scanner) {
         this.scanner = scanner;
+        phoneBook = new PhoneBook(scanner);
     }
 
     public void start() {
