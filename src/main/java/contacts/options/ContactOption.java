@@ -1,6 +1,6 @@
 package contacts.options;
 
-import contacts.Contact;
+import contacts.PhoneBook;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -9,25 +9,30 @@ import java.util.Scanner;
 public class ContactOption {
 
     private final Scanner scanner;
+    PhoneBook phoneBook = new PhoneBook();
 
     public ContactOption(Scanner scanner) {
         this.scanner = scanner;
     }
 
     public void start() {
-        System.out.println("Enter the name of the person:");
-        String name = scanner.nextLine();
-
-        System.out.println("Enter the surname of the person:");
-        String surname = scanner.nextLine();
-
-        System.out.println("Enter the number:");
-        String number = scanner.nextLine();
-
-        Contact contact = new Contact(name, surname, number);
-        System.out.println();
-        System.out.println("A record created!");
-        System.out.println("A Phone Book with a single record created!");
+       while (true) {
+           printInstructions();
+           switch (scanner.nextLine().toLowerCase()) {
+               case "exit":
+                   return;
+               case "count":
+                   printContactsCount();
+                   break;
+           }
+       }
     }
 
+    private void printContactsCount() {
+        System.out.println("The Phone book has " + phoneBook.getContacts().size() + " records.");
+    }
+
+    private void printInstructions() {
+        System.out.print("Enter action (add, remove, edit, count, list, exit): ");
+    }
 }
