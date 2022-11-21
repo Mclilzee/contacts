@@ -34,17 +34,15 @@ public class ContactOption {
     }
 
     public void addNewContact() {
-        System.out.print("Enter the name: ");
-        String name = scanner.nextLine();
+        String name = getInput("Enter the name: ");
+        String surname = getInput("Enter the surname: ");
+        String number = getInput("Enter the number: ");
 
-        System.out.print("Enter the surname: ");
-        String surname = scanner.nextLine();
-
-        System.out.print("Enter the number: ");
-        String number = scanner.nextLine();
-
-        phoneBook.addContact(new Contact(name, surname, number));
-        System.out.println("The record added.");
+        try {
+            phoneBook.addContact(new Contact(name, surname, number));
+        } catch (IllegalArgumentException ignored) {
+            System.out.println("The record added.");
+        }
     }
 
     public void printRecordsCount() {
@@ -65,17 +63,9 @@ public class ContactOption {
         }
 
         printRecordsList();
-        System.out.print("Select a record: ");
-        int index = scanner.nextInt() - 1;
-
-        processRecordEditInstructions(index);
-    }
-
-    public void processRecordEditInstructions(int index) {
-        System.out.print("Select a field (name, surname, number): ");
-        String input = scanner.nextLine();
-
-        editRecord(index, input);
+        int index = Integer.parseInt(getInput("Select a record: ")) - 1;
+        String field = getInput("Select a field (name, surnma, number): ");
+        editRecord(index, field);
     }
 
     public void editRecord(int index, String field) {
@@ -87,5 +77,10 @@ public class ContactOption {
             case "number":
                 break;
         }
+    }
+
+    private String getInput(String message) {
+        System.out.println(message);
+        return scanner.nextLine();
     }
 }
