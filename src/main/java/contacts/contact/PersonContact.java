@@ -1,5 +1,7 @@
 package contacts.contact;
 
+import contacts.util.InputUtil;
+
 public class PersonContact extends Contact {
 
     private final Person person;
@@ -30,12 +32,34 @@ public class PersonContact extends Contact {
     }
 
     @Override
-    public void editInformation() {
-
+    public String getName() {
+        return person.getName() + " " + person.getSurname();
     }
 
     @Override
-    public String getName() {
-        return null;
+    public void editInformation() {
+        switch (InputUtil.getInput("Select a field (name, surname, birth, gender, number): ").toLowerCase()) {
+            case "name" -> editName();
+            case "surname" -> editSurname();
+            case "birth" -> editBirthDate();
+            case "gender" -> editGender();
+            case "number" -> editNumber();
+        }
+
+    }
+
+    private void editNumber() {
+    }
+
+    private void editGender() {
+    }
+
+    private void editBirthDate() {
+    }
+
+    private void editSurname() {
+    }
+
+    private void editName() {
     }
 }

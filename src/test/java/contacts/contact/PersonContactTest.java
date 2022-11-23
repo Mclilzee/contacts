@@ -56,10 +56,14 @@ class PersonContactTest {
     }
 
     @Test
-    void editInformation() {
+    void getName() {
+        String expected = "John Doe";
+        assertEquals(expected, personContact.getName());
     }
 
     @Test
-    void getName() {
+    void editInformation() {
     }
+
+
 }
