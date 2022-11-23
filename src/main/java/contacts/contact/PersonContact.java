@@ -1,8 +1,5 @@
 package contacts.contact;
 
-import lombok.Getter;
-
-@Getter
 public class PersonContact extends Contact {
 
     private final Person person;
@@ -14,7 +11,22 @@ public class PersonContact extends Contact {
 
     @Override
     public String getInfo() {
-        return null;
+        return """
+                Name: %s
+                Surname: %s
+                Birth date: %s
+                Gender: %s
+                Number: %s
+                Time created: %s
+                Time last edit: %s
+                """.formatted(person.getName(),
+                person.getSurname(),
+                person.getBirthDate(),
+                person.getGender(),
+                getPhoneNumber(),
+                getCreated(),
+                getLastEdited());
+
     }
 
     @Override
