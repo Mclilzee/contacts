@@ -14,6 +14,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PhoneBookTest {
 
+    private final Person person = new Person("John", "Doe", "M", "1993-12-12");
+    private final Contact firstContact = new PersonContact(person , "+0 (123) 12345");
+    private final Contact secondContact = new OrganizationContact("Pizza Shop", "Wall St. 1", "+0 (123) 12345");
+    private final Contact thirdContact = new OrganizationContact("Game Store", "Gnarren Str. 15", "+0 (123) 12345");
     private final PhoneBook phoneBook = new PhoneBook();
 
     @Test
@@ -23,8 +27,7 @@ class PhoneBookTest {
 
     @Test
     void addContact() {
-        Contact contact = new OrganizationContact("Pizza", "Street", "+0 (123) 12345");
-        phoneBook.addContact(contact);
+        phoneBook.addContact(firstContact);
         assertEquals(1, phoneBook.getContacts().size());
     }
 
@@ -49,11 +52,7 @@ class PhoneBookTest {
     @Test
     void recordListInformationCorrectListReturned() {
         fillContacts();
-        List<String> expected = List.of(
-                "1. John Doe, +0 (123) 12345",
-                "2. Mark Dobless, +0 (123) 12345",
-                "3. Emad Doblos, +0 (123) 12345"
-        );
+        List<String> expected = List.of("1. " + firstContact.getInfo(), "2. " + secondContact.getInfo(), "3. " + thirdContact.getInfo());
         assertEquals(expected, phoneBook.getRecordsInformation());
     }
 
@@ -69,21 +68,13 @@ class PhoneBookTest {
     void removeCorrectRecord() {
         fillContacts();
         phoneBook.removeRecord(1);
-        List<String> expected = List.of(
-                "1. John Doe, +0 (123) 12345",
-                "2. Emad Doblos, +0 (123) 12345"
-        );
+        List<String> expected = List.of("1. " + firstContact.getInfo(), "2. " + secondContact.getInfo());
 
         assertEquals(expected, phoneBook.getRecordsInformation());
 
     }
 
     private void fillContacts() {
-        Person person = new Person("John", "Doe", "M", "1993-12-12");
-        Contact firstContact = new PersonContact(person , "+0 (123) 12345");
-
-        Contact secondContact = new OrganizationContact("Pizza Shop", "Wall St. 1", "+0 (123) 12345");
-        Contact thirdContact = new OrganizationContact("Game Store", "Gnarren Str. 15", "+0 (123) 12345");
         phoneBook.addContact(firstContact);
         phoneBook.addContact(secondContact);
         phoneBook.addContact(thirdContact);
