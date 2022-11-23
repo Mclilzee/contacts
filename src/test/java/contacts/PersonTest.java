@@ -95,9 +95,26 @@ class PersonTest {
         assertEquals(expected, person.getBirthDate());
     }
 
-    @Test
-    void wrongBirthDateInit() {
-        person = new Person("John", "Doe", "F", "birthdate");
+    @ParameterizedTest
+    @MethodSource("correctDateProvider")
+    void initWithCorrectDates(String date) {
+        person = new Person("John", "Doe", "F", date);
+        assertEquals(date, person.getBirthDate());
+        assertEquals("", outputStream.toString());
+    }
+
+    @ParameterizedTest
+    @MethodSource("correctDateProvider")
+    void setCorrectBirthDate(String date) {
+        person.setBirthDate(date);
+        assertEquals(date, person.getBirthDate());
+        assertEquals("", outputStream.toString());
+    }
+
+    @ParameterizedTest
+    @MethodSource("wrongDateProvider")
+    void initWithWrongBirthDate(String date) {
+        person = new Person("John", "Doe", "F", date);
         String expected = "[no data]";
         assertEquals(expected, person.getBirthDate());
     }
@@ -108,5 +125,13 @@ class PersonTest {
 
     private static Stream<String> correctGenderProvider() {
         return Stream.of("f", "m", "M", "F");
+    }
+
+    private static Stream<String> correctDateProvider() {
+        return Stream.of("2000-1-1", "1993-11-5", "1922-01-04", "2012-12-12");
+    }
+
+    private static Stream<String> wrongDateProvider() {
+        return Stream.of("birthdate", null, "1822-2-1", "1999-15-12", "1999-12-32", "");
     }
 }

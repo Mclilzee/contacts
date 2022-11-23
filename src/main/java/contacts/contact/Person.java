@@ -61,7 +61,7 @@ public class Person {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
             LocalDate date = LocalDate.parse(dateString, formatter);
             return date.isAfter(LocalDate.now()) || date.isBefore(LocalDate.of(1900, 1, 1));
-        } catch (DateTimeParseException ex) {
+        } catch (DateTimeParseException | NullPointerException ex) {
             return true;
         }
     }
