@@ -36,6 +36,22 @@ public class PersonContact extends Contact {
         return person.getName() + " " + person.getSurname();
     }
 
+    public String getName() {
+        return person.getName();
+    }
+
+    public String getSurname() {
+        return person.getSurname();
+    }
+
+    public String getBirthDate() {
+        return person.getBirthDate();
+    }
+
+    public String getGender() {
+        return person.getGender();
+    }
+
     @Override
     public void editInformation(Scanner scanner) {
         System.out.print("Select a field (name, surname, birth, gender, number): ");
@@ -50,15 +66,23 @@ public class PersonContact extends Contact {
     }
 
     private void editNumber(Scanner scanner) {
+        System.out.print("Enter number: ");
+        setPhoneNumber(scanner.nextLine());
     }
 
     private void editGender(Scanner scanner) {
+        System.out.print("Enter gender: ");
+        person.setGender(scanner.nextLine());
     }
 
     private void editBirthDate(Scanner scanner) {
+        System.out.print("Enter date: ");
+        person.setBirthDate(scanner.nextLine());
     }
 
     private void editSurname(Scanner scanner) {
+        System.out.print("Enter surname: ");
+        person.setSurname(scanner.nextLine());
     }
 
     private void editName(Scanner scanner) {

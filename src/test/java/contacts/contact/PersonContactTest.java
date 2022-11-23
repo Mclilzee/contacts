@@ -50,8 +50,17 @@ class PersonContactTest {
     }
 
     @Test
-    void getName() {
+    void getCorrectFullName() {
         String expected = "John Doe";
+        assertEquals(expected, personContact.getFullName());
+    }
+
+
+    @Test
+    void editsOptionsAreCaseInsensitive() {
+        scanner = new Scanner("nAMe\nAli\n");
+        personContact.editInformation(scanner);
+        String expected = "Ali Doe";
         assertEquals(expected, personContact.getFullName());
     }
 
@@ -59,7 +68,58 @@ class PersonContactTest {
     void editName() {
         scanner = new Scanner("name\nAli\n");
         personContact.editInformation(scanner);
-        String expected = "Ali Doe";
-        assertEquals(expected, personContact.getFullName());
+        String expected = "Ali";
+        assertEquals(expected, personContact.getName());
+
+        String output = getFieldInstructions() + "Enter name: ";
+        assertEquals(output, outputStream.toString());
+    }
+
+    @Test
+    void editSurname() {
+        scanner = new Scanner("surname\nAli\n");
+        personContact.editInformation(scanner);
+        String expected = "Ali";
+        assertEquals(expected, personContact.getSurname());
+
+        String output = getFieldInstructions() + "Enter surname: ";
+        assertEquals(output, outputStream.toString());
+    }
+
+    @Test
+    void editBirthDate() {
+        scanner = new Scanner("birth\n1922-1-2\n");
+        personContact.editInformation(scanner);
+        String expected = "1922-1-2";
+        assertEquals(expected, personContact.getBirthDate());
+
+        String output = getFieldInstructions() + "Enter date: ";
+        assertEquals(output, outputStream.toString());
+    }
+
+    @Test
+    void editGender() {
+        scanner = new Scanner("gender\nf\n");
+        personContact.editInformation(scanner);
+        String expected = "F";
+        assertEquals(expected, personContact.getGender());
+
+        String output = getFieldInstructions() + "Enter gender: ";
+        assertEquals(output, outputStream.toString());
+    }
+
+    @Test
+    void editPhoneNumber() {
+        scanner = new Scanner("number\n+12332\n");
+        personContact.editInformation(scanner);
+        String expected = "+12332";
+        assertEquals(expected, personContact.getPhoneNumber());
+
+        String output = getFieldInstructions() + "Enter number: ";
+        assertEquals(output, outputStream.toString());
+    }
+
+    private String getFieldInstructions() {
+        return "Select a field (name, surname, birth, gender, number): ";
     }
 }
