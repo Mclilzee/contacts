@@ -43,9 +43,9 @@ class PersonContactTest {
                 Birth date: 1991-2-12
                 Gender: M
                 Number: 12345
-                Time created: 2022-05-09T05:40:59
-                Time last edit: 2022-05-09T05:40:59
-                """;
+                Time created: %s
+                Time last edit: %s
+                """.formatted(mockDate.withNano(0), mockDate.withNano(0));
         assertEquals(expected, personContact.getInfo());
     }
 
