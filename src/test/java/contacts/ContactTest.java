@@ -4,16 +4,19 @@ import contacts.contact.Contact;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.MockedStatic;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
-import static contacts.util.InputUtil.getInput;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.mockito.Mockito.mockStatic;
 
 class ContactTest {
 
@@ -83,6 +86,38 @@ class ContactTest {
         ContactMock contact = new ContactMock("+0 (123) 456-789-ABcd");
         contact.mockSetPhoneNumber(number);
         assertEquals("Wrong number format!\r\n", outputStreamCaptor.toString());
+    }
+
+    @Test
+    void createdTimeSetCorrectly() {
+        LocalDateTime mockTime = LocalDateTime.of(1990, 1, 1, 10, 10, 10, 10);
+        LocalDateTime expected = LocalDateTime.of(1990, 1, 1, 10, 10, 10);
+
+        try (MockedStatic<LocalDateTime> localDateTimeMock = mockStatic(LocalDateTime.class)) {
+            localDateTimeMock.when(LocalDateTime::now).thenReturn(mockTime);
+            contact = new ContactMock("123456");
+            assertEquals(expected, contact.getCreated());
+        }
+    }
+
+    @Test
+    void lastEditedSetCorrectlyOnCreation() {
+        contact = new ContactMock("123456");
+        LocalDateTime mockTime = LocalDateTime.of(2000, 1, 1, 1, 1, 1, 20);
+        LocalDateTime expected = LocalDateTime.of(2000, 1, 1, 1, 1, 1);
+
+        try (MockedStatic<LocalDateTime> localDateTimeMock = mockStatic(LocalDateTime.class)) {
+            localDateTimeMock.when(LocalDateTime::now).thenReturn(mockTime);
+            contact.editContact();
+            assertEquals(contact.getLastEdited(), expected);
+            assertNotEquals(contact.getCreated(), contact.getLastEdited());
+        }
+    }
+
+    @Test
+    void lastEditedOnEditSetCorrectly() {
+        contact = new ContactMock("123456");
+        LocalDateTime localDateTime = LocalDateTime.now().withNano(0);
     }
 
     private static Stream<String> provideWrongNumbers() {

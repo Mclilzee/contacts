@@ -6,8 +6,6 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.regex.Pattern;
 
-import static contacts.util.InputUtil.getInput;
-
 @Getter @Setter
 public abstract class Contact {
 
@@ -25,7 +23,7 @@ public abstract class Contact {
     private LocalDateTime lastEdited;
 
     public Contact(String phoneNumber) {
-        LocalDateTime current = LocalDateTime.now();
+        LocalDateTime current = LocalDateTime.now().withNano(0);
         created = current;
         lastEdited = current;
 
@@ -53,7 +51,7 @@ public abstract class Contact {
     }
 
     public void editContact() {
-        lastEdited = LocalDateTime.now();
+        lastEdited = LocalDateTime.now().withNano(0);
         editInformation();
     }
 
