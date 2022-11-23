@@ -3,8 +3,10 @@ package contacts;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Scanner;
+import java.time.LocalDateTime;
 import java.util.regex.Pattern;
+
+import static contacts.util.InputUtil.getInput;
 
 @Getter @Setter
 public abstract class Contact {
@@ -19,8 +21,14 @@ public abstract class Contact {
         pattern = Pattern.compile(fullRegex, Pattern.CASE_INSENSITIVE);
     }
     private String phoneNumber;
+    private LocalDateTime created;
+    private LocalDateTime lastEdited;
 
     public Contact(String phoneNumber) {
+        LocalDateTime current = LocalDateTime.now();
+        created = current;
+        lastEdited = current;
+
         if (isValidPhoneNumber(phoneNumber)) {
             this.phoneNumber = phoneNumber;
         } else {
@@ -29,7 +37,8 @@ public abstract class Contact {
         }
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber() {
+        String phoneNumber = getInput("Enter phone number: ");
         if (isValidPhoneNumber(phoneNumber)) {
             this.phoneNumber = phoneNumber;
         } else {
@@ -45,7 +54,12 @@ public abstract class Contact {
         return pattern.matcher(phoneNumber).matches();
     }
 
+    public void editContact() {
+        lastEdited = LocalDateTime.now();
+        editInformation();
+    }
+
     public abstract String getInfo();
 
-    public abstract void editInformation(Scanner scanner);
+    public abstract void editInformation();
 }

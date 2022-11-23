@@ -1,20 +1,25 @@
 package contacts;
 
-import java.util.Scanner;
+import contacts.factory.ContactFactory;
+import contacts.factory.OrganizationContactFactory;
+import contacts.factory.PersonContactFactory;
+
+import static contacts.util.InputUtil.getInput;
 
 public class ContactOption {
 
-    private final Scanner scanner;
     private final PhoneBook phoneBook = new PhoneBook();
+    private final ContactFactory personFactory;
+    private final ContactFactory organizationFactory;
 
-    public ContactOption(Scanner scanner) {
-        this.scanner = scanner;
+    public ContactOption() {
+        this.personFactory = new PersonContactFactory();
+        this.organizationFactory = new OrganizationContactFactory();
     }
 
     public void start() {
         while (true) {
-            printInstructions();
-            switch (scanner.nextLine().toLowerCase()) {
+            switch (getInput("Enter action (add, remove, edit, count, list, exit): ")) {
                 case "exit":
                     return;
                 case "count":
@@ -36,20 +41,16 @@ public class ContactOption {
         }
     }
 
-    private void printInstructions() {
-        System.out.print("Enter action (add, remove, edit, count, list, exit): ");
-    }
-
     private void addNewContact() {
-        String name = getInput("Enter the name: ");
-        String surname = getInput("Enter the surname: ");
-        String number = getInput("Enter the number: ");
-
-        try {
-            phoneBook.addContact(new Contact(name, surname, number));
-            System.out.println("The record added.");
-        } catch (IllegalArgumentException ignored) {
+        String type = getInput("Enter the type: (person, organization): ");
+        Contact contact;
+        if ("person".equalsIgnoreCase(type)) {
+            contact = personFactory.createContact();
+        } else {
+            contact = organizationFactory.createContact();
         }
+
+        phoneBook.addContact(contact);
     }
 
     private void printRecordsCount() {
@@ -68,7 +69,7 @@ public class ContactOption {
 
         printRecordsList();
         int index = Integer.parseInt(getInput("Select a record: ")) - 1;
-        phoneBook.editRecordInformation(index, scanner);
+        phoneBook.editRecordInformation(index);
         printUpdatedMessage();
     }
 
@@ -82,11 +83,6 @@ public class ContactOption {
         int index = Integer.parseInt(getInput("Select a record: ")) - 1;
         phoneBook.removeRecord(index);
         System.out.println("The record removed!");
-    }
-
-    private String getInput(String message) {
-        System.out.print(message);
-        return scanner.nextLine();
     }
 
     private void printUpdatedMessage() {

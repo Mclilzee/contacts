@@ -3,7 +3,6 @@ package contacts;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.IntStream;
 
 public class PhoneBook {
@@ -28,8 +27,8 @@ public class PhoneBook {
                 .toList();
     }
 
-    public void editRecordInformation(int i, Scanner scanner) {
-        contacts.get(i).editInformation(scanner);
+    public void editRecordInformation(int i) {
+        contacts.get(i).editInformation();
     }
     public void setPhoneNumber(int i, String phoneNumber) {
         contacts.get(i).setPhoneNumber(phoneNumber);
