@@ -15,8 +15,7 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mockStatic;
 
 class ContactTest {
@@ -98,18 +97,22 @@ class ContactTest {
 
     @Test
     void createdTimeSetCorrectly() {
-        LocalDateTime mockTime = LocalDateTime.of(1990, 1, 1, 10, 10, 10, 10);
-        LocalDateTime expected = LocalDateTime.of(1990, 1, 1, 10, 10, 10);
+        LocalDateTime beforeCreation = LocalDateTime.now().minusMinutes(1);
+        contact = new ContactMock("123456");
+        LocalDateTime afterCreation = LocalDateTime.now().plusMinutes(1);
 
-        try (MockedStatic<LocalDateTime> localDateTimeMock = mockStatic(LocalDateTime.class)) {
-            localDateTimeMock.when(LocalDateTime::now).thenReturn(mockTime);
-            contact = new ContactMock("123456");
-            assertEquals(expected, contact.getCreatedDateTime());
-        }
+        assertTrue(contact.getCreatedDateTime().isAfter(beforeCreation));
+        assertTrue(contact.getCreatedDateTime().isBefore(afterCreation));
     }
 
     @Test
-    void lastEditedSetCorrectlyOnCreation() {
+    void lastEditTimeSetCorrectlyOnCreation() {
+        contact = new ContactMock("12345");
+        assertEquals(contact.getCreatedDateTime(), contact.getLastEditedDateTime());
+    }
+
+    @Test
+    void lastEditTimeUpdatedCorrectlyOnEdit() {
         contact = new ContactMock("123456");
         LocalDateTime mockTime = LocalDateTime.of(2000, 1, 1, 1, 1, 1, 20);
         LocalDateTime expected = LocalDateTime.of(2000, 1, 1, 1, 1, 1);
