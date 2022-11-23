@@ -15,7 +15,7 @@ import static org.mockito.Mockito.mockStatic;
 
 class PersonContactTest {
     private final Person person = new Person("John", "Doe", "M", "1991-2-12");
-    private PersonContact personContact = new PersonContact(person, "123456");
+    private PersonContact personContact = new PersonContact(person, "12345");
     Scanner scanner = new Scanner("");
     private static final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
@@ -53,6 +53,36 @@ class PersonContactTest {
     void getCorrectFullName() {
         String expected = "John Doe";
         assertEquals(expected, personContact.getFullName());
+    }
+
+    @Test
+    void getCorrectName() {
+        String expected = "John";
+        assertEquals(expected, personContact.getName());
+    }
+
+    @Test
+    void getCorrectSurname() {
+        String expected = "Doe";
+        assertEquals(expected, personContact.getSurname());
+    }
+
+    @Test
+    void getCorrectGender() {
+        String expected = "M";
+        assertEquals(expected, personContact.getGender());
+    }
+
+    @Test
+    void getCorrectBirthDate() {
+        String expected = "1991-2-12";
+        assertEquals(expected, personContact.getBirthDate());
+    }
+
+    @Test
+    void getCorrectPhoneNumber() {
+        String expected = "12345";
+        assertEquals(expected, personContact.getPhoneNumber());
     }
 
 
