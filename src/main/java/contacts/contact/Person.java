@@ -3,7 +3,10 @@ package contacts.contact;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
@@ -55,8 +58,9 @@ public class Person {
 
     private boolean isNotValidBirthDate(String dateString) {
         try {
-            LocalDate date = LocalDate.parse(dateString);
-            return date.isAfter(LocalDate.now()) || date.isBefore(LocalDate.of(1990, 1, 1));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
+            LocalDate date = LocalDate.parse(dateString, formatter);
+            return date.isAfter(LocalDate.now()) || date.isBefore(LocalDate.of(1900, 1, 1));
         } catch (DateTimeParseException ex) {
             return true;
         }

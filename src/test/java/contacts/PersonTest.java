@@ -51,7 +51,7 @@ class PersonTest {
     @MethodSource("correctGenderProvider")
     void initWithCorrectGender(String gender) {
         String expected = gender.toUpperCase();
-        person = new Person("John", "Doe", gender, "12345");
+        person = new Person("John", "Doe", gender, "1992-2-3");
         assertEquals(expected, person.getGender());
         assertEquals("", outputStream.toString());
     }
@@ -59,7 +59,7 @@ class PersonTest {
     @ParameterizedTest
     @MethodSource("correctGenderProvider")
     void setCorrectGender(String gender) {
-        person = new Person("John", "Doe", "F", "123456");
+        person = new Person("John", "Doe", "F", "1992-2-3");
         person.initGender(gender);
         assertEquals(gender.toUpperCase(), person.getGender());
         assertEquals("", outputStream.toString());
@@ -80,7 +80,7 @@ class PersonTest {
     @ParameterizedTest
     @MethodSource("wrongGenderProvider")
     void setWrongGender(String gender) {
-        person = new Person("John", "Doe", "F", "12345");
+        person = new Person("John", "Doe", "F", "1993-1-1");
         person.setGender(gender);
         String expected = gender == null ? "" : gender.toUpperCase();
         assertEquals(expected, person.getGender());
