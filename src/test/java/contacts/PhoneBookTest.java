@@ -57,23 +57,6 @@ class PhoneBookTest {
         assertEquals(expected, phoneBook.getRecordsInformation());
     }
 
-
-    @Test
-    void setPhoneNumberFirstIndex() {
-        fillContacts();
-        phoneBook.setPhoneNumber(0, "+0 (234) 432");
-        String expected = "+0 (234) 432";
-        assertEquals(expected, phoneBook.getContacts().get(0).getPhoneNumber());
-    }
-
-    @Test
-    void setPhoneNumberLastIndex() {
-        fillContacts();
-        phoneBook.setPhoneNumber(2, "+0 (234) 4321");
-        String expected = "+0 (234) 4321";
-        assertEquals(expected, phoneBook.getContacts().get(2).getPhoneNumber());
-    }
-
     @Test
     void removeRecord() {
         fillContacts();

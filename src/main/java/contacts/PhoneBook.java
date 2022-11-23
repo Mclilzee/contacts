@@ -30,10 +30,7 @@ public class PhoneBook {
     }
 
     public void editRecordInformation(int i) {
-        contacts.get(i).editInformation();
-    }
-    public void setPhoneNumber(int i, String phoneNumber) {
-        contacts.get(i).setPhoneNumber(phoneNumber);
+        contacts.get(i).editContact();
     }
 
     public void removeRecord(int index) {

@@ -37,11 +37,9 @@ public abstract class Contact {
         }
     }
 
-    public void setPhoneNumber() {
-        String phoneNumber = getInput("Enter phone number: ");
-        if (isValidPhoneNumber(phoneNumber)) {
-            this.phoneNumber = phoneNumber;
-        } else {
+    protected void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+        if (!isValidPhoneNumber(phoneNumber)) {
             System.out.println("Wrong number format!");
         }
     }
@@ -61,5 +59,5 @@ public abstract class Contact {
 
     public abstract String getInfo();
 
-    public abstract void editInformation();
+    protected abstract void editInformation();
 }

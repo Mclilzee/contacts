@@ -1,26 +1,35 @@
 package contacts;
 
 import contacts.contact.Contact;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.stream.Stream;
 
+import static contacts.util.InputUtil.getInput;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ContactTest {
 
     private Contact contact = new ContactMock("+0 (123) 456-789-ABcd");
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    private static final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void init() {
         System.setOut(new PrintStream(outputStreamCaptor));
     }
+
+    @BeforeEach
+    void setup() {
+        outputStreamCaptor.reset();
+    }
+
     @ParameterizedTest
     @DisplayName("Correct phone number set correctly")
     @MethodSource("provideCorrectPhoneNumbers")
@@ -60,9 +69,8 @@ class ContactTest {
     @DisplayName("Wrong number in setter will change value")
     @MethodSource("provideWrongNumbers")
     void setterWrongPhoneNumber(String number) {
-        outputStreamCaptor.reset();
-        contact = new ContactMock("+0 (123) 456-789-ABcd");
-        contact.setPhoneNumber(number);
+        ContactMock contact = new ContactMock("+0 (123) 456-789-ABcd");
+        contact.mockSetPhoneNumber(number);
         assertEquals(number, contact.getPhoneNumber());
     }
 
@@ -71,8 +79,9 @@ class ContactTest {
     @MethodSource("provideWrongNumbers")
     void setterWrongPhoneNumberOutput(String number) {
         outputStreamCaptor.reset();
-        contact = new ContactMock("+0 (123) 456-789-ABcd");
-        contact.setPhoneNumber(number);
+
+        ContactMock contact = new ContactMock("+0 (123) 456-789-ABcd");
+        contact.mockSetPhoneNumber(number);
         assertEquals("Wrong number format!\r\n", outputStreamCaptor.toString());
     }
 
@@ -111,7 +120,11 @@ class ContactTest {
         }
 
         @Override
-        public void editInformation() {
+        protected void editInformation() {
+        }
+
+        public void mockSetPhoneNumber(String phoneNumber) {
+            setPhoneNumber(phoneNumber);
         }
     }
 }
