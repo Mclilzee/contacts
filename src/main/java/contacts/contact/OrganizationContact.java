@@ -1,9 +1,7 @@
 package contacts.contact;
 
-import lombok.Getter;
 import java.util.Scanner;
 
-@Getter
 public class OrganizationContact extends Contact {
 
     private String organizationName;
@@ -16,7 +14,13 @@ public class OrganizationContact extends Contact {
     }
     @Override
     public String getInfo() {
-        return null;
+        return """
+                Organization name: %s
+                Address: %s
+                Number: %s
+                Time created: %s
+                Time last edit: %s
+                """.formatted(organizationName, address, getPhoneNumber(), getCreatedDateTime(), getLastEditedDateTime());
     }
 
     @Override
@@ -26,6 +30,10 @@ public class OrganizationContact extends Contact {
 
     @Override
     public String getFullName() {
-        return null;
+        return organizationName;
+    }
+
+    public String getAddress() {
+        return address;
     }
 }

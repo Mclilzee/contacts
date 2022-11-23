@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mockStatic;
 
 class PersonContactTest {
@@ -83,6 +84,18 @@ class PersonContactTest {
     void getCorrectPhoneNumber() {
         String expected = "12345";
         assertEquals(expected, personContact.getPhoneNumber());
+    }
+
+    @Test
+    void getCreatedTime() {
+        String expected = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}";
+        assertTrue(personContact.getCreatedDateTime().toString().matches(expected));
+    }
+
+    @Test
+    void getLastEditTime() {
+        String expected = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}";
+        assertTrue(personContact.getLastEditedDateTime().toString().matches(expected));
     }
 
 

@@ -9,8 +9,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mockStatic;
 
 class OrganizationContactTest {
@@ -43,23 +43,41 @@ class OrganizationContactTest {
                 Number: 12345
                 Time created: %s
                 Time last edit: %s
-                """.formatted(mockTime, mockTime);
+                """.formatted(mockTime.withNano(0), mockTime.withNano(0));
         assertEquals(expected, organizationContact.getInfo());
     }
 
     @Test
-    void editInformation() {
-    }
-
-    @Test
     void getFullName() {
-    }
-
-    @Test
-    void getOrganizationName() {
+        String expected = "Pizza store";
+        assertEquals(expected, organizationContact.getFullName());
     }
 
     @Test
     void getAddress() {
+        String expected = "Gnar Str. 11";
+        assertEquals(expected, organizationContact.getAddress());
+    }
+
+    @Test
+    void getPhoneNumber() {
+        String expected = "12345";
+        assertEquals(expected, organizationContact.getPhoneNumber());
+    }
+
+    @Test
+    void getCreatedTime() {
+        String expected = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}";
+        assertTrue(organizationContact.getCreatedDateTime().toString().matches(expected));
+    }
+
+    @Test
+    void getLastEditTime() {
+        String expected = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}";
+        assertTrue(organizationContact.getLastEditedDateTime().toString().matches(expected));
+    }
+
+    @Test
+    void editInformation() {
     }
 }
