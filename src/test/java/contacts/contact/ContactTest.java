@@ -1,4 +1,4 @@
-package contacts;
+package contacts.contact;
 
 import contacts.contact.Contact;
 import org.junit.jupiter.api.BeforeAll;
