@@ -35,18 +35,18 @@ class ContactTest {
         outputStreamCaptor.reset();
     }
 
-    @ParameterizedTest
-    @DisplayName("Correct phone number set correctly")
-    @MethodSource("provideCorrectPhoneNumbers")
-    void correctPhoneNumber(String number) {
-        contact = new ContactMock(number);
-        assertEquals(number, contact.getPhoneNumber());
-    }
-
     @Test
     void getCorrectName() {
         String expected = "Mock Contact";
         assertEquals(expected, contact.getFullName());
+    }
+
+    @ParameterizedTest
+    @DisplayName("Correct phone number set correctly")
+    @MethodSource("provideCorrectPhoneNumbers")
+    void getCorrectPhoneNumber(String number) {
+        contact = new ContactMock(number);
+        assertEquals(number, contact.getPhoneNumber());
     }
 
     @ParameterizedTest

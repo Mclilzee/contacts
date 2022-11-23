@@ -25,9 +25,9 @@ public class PersonContact extends Contact {
                 person.getSurname(),
                 person.getBirthDate(),
                 person.getGender(),
-                getPhoneNumber(),
-                getCreatedDateTime(),
-                getLastEditedDateTime());
+                super.getPhoneNumber(),
+                super.getCreatedDateTime(),
+                super.getLastEditedDateTime());
 
     }
 

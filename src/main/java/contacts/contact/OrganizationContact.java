@@ -1,11 +1,9 @@
 package contacts.contact;
 
 import lombok.Getter;
-import lombok.Setter;
-
 import java.util.Scanner;
 
-@Getter @Setter
+@Getter
 public class OrganizationContact extends Contact {
 
     private String organizationName;

@@ -1,13 +1,9 @@
 package contacts.contact;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-@Getter @Setter
 public abstract class Contact {
 
     private static final Pattern pattern;
@@ -20,7 +16,7 @@ public abstract class Contact {
         pattern = Pattern.compile(fullRegex, Pattern.CASE_INSENSITIVE);
     }
     private String phoneNumber;
-    private LocalDateTime createdDateTime;
+    private final LocalDateTime createdDateTime;
     private LocalDateTime lastEditedDateTime;
 
     public Contact(String phoneNumber) {
@@ -34,6 +30,18 @@ public abstract class Contact {
             this.phoneNumber = "[no number]";
             System.out.println("Wrong number format!");
         }
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    public LocalDateTime getLastEditedDateTime() {
+        return lastEditedDateTime;
     }
 
     protected void setPhoneNumber(String phoneNumber) {
