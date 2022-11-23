@@ -15,9 +15,9 @@ public class ContactOption {
     private final Scanner scanner;
 
     public ContactOption(Scanner scanner) {
-        this.personFactory = new PersonContactFactory();
-        this.organizationFactory = new OrganizationContactFactory();
         this.scanner = scanner;
+        this.personFactory = new PersonContactFactory(scanner);
+        this.organizationFactory = new OrganizationContactFactory(scanner);
     }
 
     public void start() {

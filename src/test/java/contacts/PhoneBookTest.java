@@ -59,7 +59,7 @@ class PhoneBookTest {
     @Test
     void getContactInformation() {
         fillContacts();
-        assertEquals(secondContact.getInfo(), phoneBook.getContactInformation(2));
+        assertEquals(secondContact.getInfo(), phoneBook.getContactInformation(1));
     }
 
     @Test
