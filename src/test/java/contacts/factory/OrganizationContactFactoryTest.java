@@ -1,14 +1,36 @@
 package contacts.factory;
 
 import contacts.contact.OrganizationContact;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OrganizationContactFactoryTest {
     private OrganizationContact contact;
+    private static final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+    @BeforeAll
+    static void init() {
+        System.setOut(new PrintStream(outputStream));
+    }
+
+    @BeforeEach
+    void setup() {
+        outputStream.reset();
+    }
+
+    @Test
+    void outputCorrectInstructions() {
+        contact = generateContactFromInput("Pizza Shop\nWall St. 1\n+0 (123) 456-789-9999\n");
+        String expected = "Enter the organization name: Enter the address: Enter the number: ";
+        assertEquals(expected, outputStream.toString());
+    }
 
     @Test
     void contactHasCorrectName() {
