@@ -1,6 +1,5 @@
 package contacts.factory;
 
-import contacts.contact.Contact;
 import contacts.contact.Person;
 import contacts.contact.PersonContact;
 

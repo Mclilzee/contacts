@@ -29,7 +29,7 @@ public class ContactOption {
                 case "count":
                     printRecordsCount();
                     break;
-                case "list":
+                case "info":
                     printRecordIndexList();
                     break;
                 case "add":
