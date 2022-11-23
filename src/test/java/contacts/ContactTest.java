@@ -41,6 +41,12 @@ class ContactTest {
         assertEquals(number, contact.getPhoneNumber());
     }
 
+    @Test
+    void getCorrectName() {
+        String expected = "Mock Contact";
+        assertEquals(expected, contact.getName());
+    }
+
     @ParameterizedTest
     @DisplayName("Correct phone number outputs no message to the console")
     @MethodSource("provideCorrectPhoneNumbers")
@@ -156,6 +162,11 @@ class ContactTest {
 
         @Override
         protected void editInformation() {
+        }
+
+        @Override
+        public String getName() {
+            return "Mock Contact";
         }
 
         public void mockSetPhoneNumber(String phoneNumber) {

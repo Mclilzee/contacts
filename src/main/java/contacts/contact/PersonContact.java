@@ -21,4 +21,9 @@ public class PersonContact extends Contact {
     public void editInformation() {
 
     }
+
+    @Override
+    public String getName() {
+        return null;
+    }
 }

@@ -23,4 +23,9 @@ public class OrganizationContact extends Contact {
     public void editInformation() {
 
     }
+
+    @Override
+    public String getName() {
+        return null;
+    }
 }

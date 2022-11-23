@@ -58,4 +58,6 @@ public abstract class Contact {
     public abstract String getInfo();
 
     protected abstract void editInformation();
+
+    public abstract String getName();
 }
