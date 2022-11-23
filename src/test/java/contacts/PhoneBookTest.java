@@ -57,6 +57,13 @@ class PhoneBookTest {
     }
 
     @Test
+    void editCorrectContact() {
+        fillContacts();
+        phoneBook.editRecordInformation(1);
+        
+    }
+
+    @Test
     void removeRecord() {
         fillContacts();
         phoneBook.removeRecord(0);
