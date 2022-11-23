@@ -26,7 +26,7 @@ public class PhoneBook {
 
     public List<String> getContactIndexInformation() {
         return IntStream.range(0, contacts.size())
-                .mapToObj(index -> (index + 1) + ". " + contacts.get(index).getName())
+                .mapToObj(index -> (index + 1) + ". " + contacts.get(index).getFullName())
                 .toList();
     }
 

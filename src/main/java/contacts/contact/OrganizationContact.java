@@ -27,7 +27,7 @@ public class OrganizationContact extends Contact {
     }
 
     @Override
-    public String getName() {
+    public String getFullName() {
         return null;
     }
 }

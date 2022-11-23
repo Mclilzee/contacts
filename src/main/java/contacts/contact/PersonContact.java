@@ -32,7 +32,7 @@ public class PersonContact extends Contact {
     }
 
     @Override
-    public String getName() {
+    public String getFullName() {
         return person.getName() + " " + person.getSurname();
     }
 

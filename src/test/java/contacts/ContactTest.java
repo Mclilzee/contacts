@@ -46,7 +46,7 @@ class ContactTest {
     @Test
     void getCorrectName() {
         String expected = "Mock Contact";
-        assertEquals(expected, contact.getName());
+        assertEquals(expected, contact.getFullName());
     }
 
     @ParameterizedTest
@@ -160,7 +160,7 @@ class ContactTest {
         }
 
         @Override
-        public String getName() {
+        public String getFullName() {
             return "Mock Contact";
         }
 

@@ -60,5 +60,5 @@ public abstract class Contact {
 
     protected abstract void editInformation(Scanner scanner);
 
-    public abstract String getName();
+    public abstract String getFullName();
 }
