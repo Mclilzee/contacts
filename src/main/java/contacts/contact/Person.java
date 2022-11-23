@@ -13,16 +13,28 @@ public class Person {
     public Person(String name, String surname, String gender, String birthDate) {
         this.name = name;
         this.surname = surname;
-        setGender(gender);
+        initGender(gender);
         this.birthDate = birthDate;
     }
 
-    public void setGender(String gender) {
+    public void initGender(String gender) {
         if (gender == null || !gender.matches("(?i)[MF]")) {
             this.gender = "[no gender]";
             System.out.println("Bad gender!");
         } else {
             this.gender = gender.toUpperCase();
         }
+    }
+
+    public void setGender(String gender) {
+        if (gender == null ) {
+            gender = "";
+        }
+
+        if (!gender.matches("(?i)[MF]")) {
+            System.out.println("Bad gender!");
+        }
+
+        this.gender = gender.toUpperCase();
     }
 }
