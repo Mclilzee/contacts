@@ -59,7 +59,7 @@ public class ContactOption {
     }
 
     private void printRecordsList() {
-        phoneBook.getRecordsInformation().forEach(System.out::println);
+        phoneBook.getContactIndexInformation().forEach(System.out::println);
     }
 
     private void editRecordsInstructions() {
@@ -70,7 +70,7 @@ public class ContactOption {
 
         printRecordsList();
         int index = Integer.parseInt(getInput("Select a record: ")) - 1;
-        phoneBook.editRecordInformation(index);
+        phoneBook.editContactInformation(index);
         printUpdatedMessage();
     }
 
@@ -82,7 +82,7 @@ public class ContactOption {
 
         printRecordsList();
         int index = Integer.parseInt(getInput("Select a record: ")) - 1;
-        phoneBook.removeRecord(index);
+        phoneBook.removeContact(index);
         System.out.println("The record removed!");
     }
 

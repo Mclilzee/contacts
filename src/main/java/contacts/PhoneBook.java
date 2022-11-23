@@ -23,17 +23,21 @@ public class PhoneBook {
         return Collections.unmodifiableList(contacts);
     }
 
-    public List<String> getRecordsInformation() {
+    public List<String> getContactIndexInformation() {
         return IntStream.range(0, contacts.size())
-                .mapToObj(index -> (index + 1) + ". " + contacts.get(index).getInfo())
+                .mapToObj(index -> (index + 1) + ". " + contacts.get(index).getName())
                 .toList();
     }
 
-    public void editRecordInformation(int i) {
+    public String getContactInformation(int index) {
+        return contacts.get(index).getInfo();
+    }
+
+    public void editContactInformation(int i) {
         contacts.get(i).editContact();
     }
 
-    public void removeRecord(int index) {
+    public void removeContact(int index) {
         contacts.remove(index);
     }
 }

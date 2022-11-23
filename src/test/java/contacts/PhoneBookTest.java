@@ -43,41 +43,47 @@ class PhoneBookTest {
     }
 
     @Test
-    @DisplayName("Records list information returns empty list, when no records exist")
-    void recordListInformationEmpty() {
+    @DisplayName("Contacts list information returns empty list, when no contacts exist")
+    void contactListInformationEmpty() {
         List<String> expected = List.of();
-        assertEquals(expected, phoneBook.getRecordsInformation());
+        assertEquals(expected, phoneBook.getContactIndexInformation());
     }
 
     @Test
-    void recordListInformationCorrectListReturned() {
+    void contactIndexInformationCorrectListReturned() {
         fillContacts();
         List<String> expected = List.of("1. " + firstContact.getInfo(), "2. " + secondContact.getInfo(), "3. " + thirdContact.getInfo());
-        assertEquals(expected, phoneBook.getRecordsInformation());
+        assertEquals(expected, phoneBook.getContactIndexInformation());
+    }
+
+    @Test
+    void getContactInformation() {
+        fillContacts();
+        assertEquals(secondContact.getInfo(), phoneBook.getContactInformation(2));
     }
 
     @Test
     void editCorrectContact() {
         fillContacts();
-        phoneBook.editRecordInformation(1);
-        
+        phoneBook.editContactInformation(1);
+
     }
 
     @Test
-    void removeRecord() {
+    void removeContact() {
         fillContacts();
-        phoneBook.removeRecord(0);
+        phoneBook.removeContact(0);
         int expected = 2;
         assertEquals(expected, phoneBook.getContacts().size());
     }
 
     @Test
-    void removeCorrectRecord() {
+    void removeCorrectContact() {
         fillContacts();
-        phoneBook.removeRecord(1);
+        phoneBook.removeContact(1);
         List<String> expected = List.of("1. " + firstContact.getInfo(), "2. " + secondContact.getInfo());
 
-        assertEquals(expected, phoneBook.getRecordsInformation());
+        assertEquals(expected, phoneBook.getContactIndexInformation());
 
     }
 
