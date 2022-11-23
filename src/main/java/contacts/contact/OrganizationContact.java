@@ -24,6 +24,15 @@ public class OrganizationContact extends Contact {
     }
 
     @Override
+    public String getFullName() {
+        return organizationName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    @Override
     public void editInformation(Scanner scanner) {
         System.out.print("Select a field (address, number): ");
         switch (scanner.nextLine().toLowerCase()) {
@@ -33,19 +42,12 @@ public class OrganizationContact extends Contact {
     }
 
     private void editPhoneNumber(Scanner scanner) {
+        System.out.print("Enter number: ");
+        setPhoneNumber(scanner.nextLine());
     }
 
     private void editAddress(Scanner scanner) {
         System.out.print("Enter address: ");
         address = scanner.nextLine();
-    }
-
-    @Override
-    public String getFullName() {
-        return organizationName;
-    }
-
-    public String getAddress() {
-        return address;
     }
 }

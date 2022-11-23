@@ -68,29 +68,48 @@ class OrganizationContactTest {
     }
 
     @Test
-    void getCreatedTime() {
-        String expected = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}";
-        assertTrue(organizationContact.getCreatedDateTime().toString().matches(expected));
-    }
+    void emptyInputDoesNothing() {
+        scanner = new Scanner("\n");
+        organizationContact.editInformation(scanner);
 
-    @Test
-    void getLastEditTime() {
-        String expected = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}";
-        assertTrue(organizationContact.getLastEditedDateTime().toString().matches(expected));
+        String output = getSelectFieldMessage();
+        assertEquals(output, outputStream.toString());
     }
 
     @Test
     void editInformationCaseInsensitive() {
+        scanner = new Scanner("adDREss\nBerlin Str. 20\n");
+        organizationContact.editInformation(scanner);
+        String expected = "Berlin Str. 20";
+        assertEquals(expected, organizationContact.getAddress());
+
+        String output = getSelectFieldMessage() + "Enter address: ";
+        assertEquals(output, outputStream.toString());
+    }
+
+    @Test
+    void editAddress() {
         scanner = new Scanner("address\nBerlin Str. 20\n");
         organizationContact.editInformation(scanner);
         String expected = "Berlin Str. 20";
         assertEquals(expected, organizationContact.getAddress());
 
-        String output = "Select a field (address, number): Enter address: ";
+        String output = getSelectFieldMessage() + "Enter address: ";
         assertEquals(output, outputStream.toString());
     }
 
     @Test
-    void editInformation() {
+    void editPhoneNumber() {
+        scanner = new Scanner("number\n123\n");
+        organizationContact.editInformation(scanner);
+        String expected = "123";
+        assertEquals(expected, organizationContact.getPhoneNumber());
+
+        String output = getSelectFieldMessage() + "Enter number: ";
+        assertEquals(output, outputStream.toString());
+    }
+
+    private static String getSelectFieldMessage() {
+        return "Select a field (address, number): ";
     }
 }
