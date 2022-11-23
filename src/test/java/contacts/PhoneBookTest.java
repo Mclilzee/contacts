@@ -65,11 +65,14 @@ class PhoneBookTest {
     @Test
     void editCorrectContact() {
         fillContacts();
-        assertEquals(firstContact.getName(), phoneBook.getContacts().get(0).getName());
+        String expectedBeforeChange = "John Doe";
+        assertEquals(expectedBeforeChange, phoneBook.getContacts().get(0).getName());
 
         Scanner scanner = new Scanner("name\nSmith");
         phoneBook.editContactInformation(0, scanner);
-        assertNotEquals(firstContact.getName(), phoneBook.getContacts().get(0).getName());
+
+        String expectedAfterChange = "Smith Doe";
+        assertEquals(expectedAfterChange, phoneBook.getContacts().get(0).getName());
     }
 
     @Test
@@ -84,7 +87,7 @@ class PhoneBookTest {
     void removeCorrectContact() {
         fillContacts();
         phoneBook.removeContact(1);
-        List<String> expected = List.of("1. " + firstContact.getInfo(), "2. " + thirdContact.getInfo());
+        List<String> expected = List.of("1. " + firstContact.getName(), "2. " + thirdContact.getName());
 
         assertEquals(expected, phoneBook.getContactIndexInformation());
 

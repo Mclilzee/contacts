@@ -104,7 +104,7 @@ class ContactTest {
         try (MockedStatic<LocalDateTime> localDateTimeMock = mockStatic(LocalDateTime.class)) {
             localDateTimeMock.when(LocalDateTime::now).thenReturn(mockTime);
             contact = new ContactMock("123456");
-            assertEquals(expected, contact.getCreated());
+            assertEquals(expected, contact.getCreatedDateTime());
         }
     }
 
@@ -117,15 +117,8 @@ class ContactTest {
         try (MockedStatic<LocalDateTime> localDateTimeMock = mockStatic(LocalDateTime.class)) {
             localDateTimeMock.when(LocalDateTime::now).thenReturn(mockTime);
             contact.editContact(scanner);
-            assertEquals(contact.getLastEdited(), expected);
-            assertNotEquals(contact.getCreated(), contact.getLastEdited());
+            assertEquals(contact.getLastEditedDateTime(), expected);
         }
-    }
-
-    @Test
-    void lastEditedOnEditSetCorrectly() {
-        contact = new ContactMock("123456");
-        LocalDateTime localDateTime = LocalDateTime.now().withNano(0);
     }
 
     private static Stream<String> provideWrongNumbers() {

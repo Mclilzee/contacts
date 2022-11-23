@@ -20,13 +20,13 @@ public abstract class Contact {
         pattern = Pattern.compile(fullRegex, Pattern.CASE_INSENSITIVE);
     }
     private String phoneNumber;
-    private LocalDateTime created;
-    private LocalDateTime lastEdited;
+    private LocalDateTime createdDateTime;
+    private LocalDateTime lastEditedDateTime;
 
     public Contact(String phoneNumber) {
         LocalDateTime current = LocalDateTime.now().withNano(0);
-        created = current;
-        lastEdited = current;
+        createdDateTime = current;
+        lastEditedDateTime = current;
 
         if (isValidPhoneNumber(phoneNumber)) {
             this.phoneNumber = phoneNumber;
@@ -52,7 +52,7 @@ public abstract class Contact {
     }
 
     public void editContact(Scanner scanner) {
-        lastEdited = LocalDateTime.now().withNano(0);
+        lastEditedDateTime = LocalDateTime.now().withNano(0);
         editInformation(scanner);
     }
 

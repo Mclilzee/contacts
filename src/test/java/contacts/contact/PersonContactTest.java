@@ -37,21 +37,19 @@ class PersonContactTest {
     @Test
     void getInfoWithCorrectEditDate() {
         LocalDateTime mockDate = LocalDateTime.of(2022, 5, 9, 5, 40, 59, 20);
-        LocalDateTime mockEditDate = LocalDateTime.of(2023, 5, 10, 12, 2, 5, 10);
         try (MockedStatic<LocalDateTime> localDateTimeMock = mockStatic(LocalDateTime.class)) {
-            localDateTimeMock.when(LocalDateTime::now).thenReturn(mockDate).thenReturn(mockEditDate);
+            localDateTimeMock.when(LocalDateTime::now).thenReturn(mockDate);
             personContact = new PersonContact(person, "12345");
-            personContact.editInformation(scanner);
         }
 
         String expected = """
-                Name: Smith
+                Name: John
                 Surname: Doe
                 Birth date: 1991-2-12
                 Gender: M
                 Number: 12345
                 Time created: 2022-05-09T05:40:59
-                Time last edit: 2023-05-10T12:02:05
+                Time last edit: 2022-05-09T05:40:59
                 """;
         assertEquals(expected, personContact.getInfo());
     }
