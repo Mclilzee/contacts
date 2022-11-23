@@ -3,6 +3,7 @@ package contacts;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.IntStream;
 
 public class PhoneBook {
@@ -23,18 +24,13 @@ public class PhoneBook {
 
     public List<String> getRecordsInformation() {
         return IntStream.range(0, contacts.size())
-                .mapToObj(index -> (index + 1) + ". " + contacts.get(index))
+                .mapToObj(index -> (index + 1) + ". " + contacts.get(index).getInfo())
                 .toList();
     }
 
-    public void setName(int i, String name) {
-        contacts.get(i).setName(name);
+    public void editRecordInformation(int i, Scanner scanner) {
+        contacts.get(i).editInformation(scanner);
     }
-
-    public void setSurname(int i, String surname) {
-       contacts.get(i).setSurname(surname);
-    }
-
     public void setPhoneNumber(int i, String phoneNumber) {
         contacts.get(i).setPhoneNumber(phoneNumber);
     }

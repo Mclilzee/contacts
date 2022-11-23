@@ -3,10 +3,11 @@ package contacts;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 @Getter @Setter
-public class Contact {
+public abstract class Contact {
 
     private static final Pattern pattern;
 
@@ -17,17 +18,9 @@ public class Contact {
         String fullRegex =  String.format("\\+?(\\(?[\\da-z]+\\)?|(%s|%s|%s)([\\s-][\\da-z]{2,})*)", firstGroupWrapped, secondGroupWrapped, bothGroupsUnwrapped);
         pattern = Pattern.compile(fullRegex, Pattern.CASE_INSENSITIVE);
     }
-
-    private String name;
-    private String surname;
     private String phoneNumber;
 
-
-
-    public Contact(String name, String surname, String phoneNumber) {
-        this.name = name;
-        this.surname = surname;
-
+    public Contact(String phoneNumber) {
         if (isValidPhoneNumber(phoneNumber)) {
             this.phoneNumber = phoneNumber;
         } else {
@@ -52,9 +45,7 @@ public class Contact {
         return pattern.matcher(phoneNumber).matches();
     }
 
-    @Override
-    public String toString() {
-        return name + " " + surname + ", " + phoneNumber;
-    }
+    public abstract String getInfo();
 
+    public abstract void editInformation(Scanner scanner);
 }

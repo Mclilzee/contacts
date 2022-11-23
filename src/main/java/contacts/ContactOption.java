@@ -68,34 +68,7 @@ public class ContactOption {
 
         printRecordsList();
         int index = Integer.parseInt(getInput("Select a record: ")) - 1;
-        String field = getInput("Select a field (name, surname, number): ");
-        editRecord(index, field);
-    }
-
-    private void editRecord(int index, String field) {
-        switch (field.toLowerCase()) {
-            case "name" -> editRecordName(index);
-            case "surname" -> editSurname(index);
-            case "number" -> editRecordNumber(index);
-            default -> throw new IllegalArgumentException();
-        }
-    }
-
-    private void editRecordNumber(int index) {
-        String phoneNumber = getInput("Enter number: ");
-        phoneBook.setPhoneNumber(index, phoneNumber);
-        printUpdatedMessage();
-    }
-
-    private void editSurname(int index) {
-        String surname = getInput("Enter surname: ");
-        phoneBook.setSurname(index, surname);
-        printUpdatedMessage();
-    }
-
-    private void editRecordName(int index) {
-        String name = getInput("Enter name: ");
-        phoneBook.setName(index, name);
+        phoneBook.editRecordInformation(index, scanner);
         printUpdatedMessage();
     }
 
