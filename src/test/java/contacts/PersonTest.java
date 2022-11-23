@@ -70,7 +70,7 @@ class PersonTest {
     @MethodSource("wrongGenderProvider")
     void initWithWrongGender(String gender) {
         person = new Person("John", "Doe", gender, "1993-1-1");
-        String expected = "[no gender]";
+        String expected = "[no data]";
         assertEquals(expected, person.getGender());
 
         String expectedOutput = "Bad gender!\r\n";
@@ -92,6 +92,13 @@ class PersonTest {
     @Test
     void returnCorrectBirthdate() {
         String expected = "1992-2-3";
+        assertEquals(expected, person.getBirthDate());
+    }
+
+    @Test
+    void wrongBirthDateInit() {
+        person = new Person("John", "Doe", "F", "birthdate");
+        String expected = "[no data]";
         assertEquals(expected, person.getBirthDate());
     }
 

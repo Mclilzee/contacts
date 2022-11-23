@@ -3,8 +3,14 @@ package contacts.contact;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.regex.Pattern;
+
 @Getter @Setter
 public class Person {
+    private static final Pattern genderPattern = Pattern.compile("[MF]", Pattern.CASE_INSENSITIVE);
+
     private String name;
     private String surname;
     private String gender;
@@ -14,12 +20,12 @@ public class Person {
         this.name = name;
         this.surname = surname;
         initGender(gender);
-        this.birthDate = birthDate;
+        setBirthDate(birthDate);
     }
 
     public void initGender(String gender) {
-        if (gender == null || !gender.matches("(?i)[MF]")) {
-            this.gender = "[no gender]";
+        if (gender == null || !genderPattern.matcher(gender).matches()) {
+            this.gender = "[no data]";
             System.out.println("Bad gender!");
         } else {
             this.gender = gender.toUpperCase();
@@ -31,10 +37,28 @@ public class Person {
             gender = "";
         }
 
-        if (!gender.matches("(?i)[MF]")) {
+        if (!genderPattern.matcher(gender).matches()) {
             System.out.println("Bad gender!");
         }
 
         this.gender = gender.toUpperCase();
+    }
+
+    public void setBirthDate(String birthDate) {
+       if (isNotValidBirthDate(birthDate)) {
+           this.birthDate = "[no data]";
+           System.out.println("Bad date!");
+       } else {
+           this.birthDate = birthDate;
+       }
+    }
+
+    private boolean isNotValidBirthDate(String dateString) {
+        try {
+            LocalDate date = LocalDate.parse(dateString);
+            return date.isAfter(LocalDate.now()) || date.isBefore(LocalDate.of(1990, 1, 1));
+        } catch (DateTimeParseException ex) {
+            return true;
+        }
     }
 }
