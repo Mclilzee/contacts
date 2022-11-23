@@ -8,6 +8,7 @@ import org.mockito.MockedStatic;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,6 +17,7 @@ import static org.mockito.Mockito.mockStatic;
 class OrganizationContactTest {
 
     private OrganizationContact organizationContact = new OrganizationContact("Pizza store", "Gnar Str. 11", "12345");
+    private Scanner scanner = new Scanner("");
 
     private static final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
@@ -75,6 +77,17 @@ class OrganizationContactTest {
     void getLastEditTime() {
         String expected = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}";
         assertTrue(organizationContact.getLastEditedDateTime().toString().matches(expected));
+    }
+
+    @Test
+    void editInformationCaseInsensitive() {
+        scanner = new Scanner("address\nBerlin Str. 20\n");
+        organizationContact.editInformation(scanner);
+        String expected = "Berlin Str. 20";
+        assertEquals(expected, organizationContact.getAddress());
+
+        String output = "Select a field (address, number): Enter address: ";
+        assertEquals(output, outputStream.toString());
     }
 
     @Test

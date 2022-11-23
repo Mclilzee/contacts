@@ -25,7 +25,19 @@ public class OrganizationContact extends Contact {
 
     @Override
     public void editInformation(Scanner scanner) {
+        System.out.print("Select a field (address, number): ");
+        switch (scanner.nextLine().toLowerCase()) {
+            case "address" -> editAddress(scanner);
+            case "number" -> editPhoneNumber(scanner);
+        }
+    }
 
+    private void editPhoneNumber(Scanner scanner) {
+    }
+
+    private void editAddress(Scanner scanner) {
+        System.out.print("Enter address: ");
+        address = scanner.nextLine();
     }
 
     @Override
