@@ -1,8 +1,8 @@
 package contacts.factory;
 
-import contacts.Contact;
-import contacts.Person;
-import contacts.PersonContact;
+import contacts.contact.Contact;
+import contacts.contact.Person;
+import contacts.contact.PersonContact;
 
 public class PersonContactFactory implements ContactFactory {
 

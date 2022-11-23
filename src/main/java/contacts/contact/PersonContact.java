@@ -1,4 +1,4 @@
-package contacts;
+package contacts.contact;
 
 import lombok.Getter;
 
@@ -15,5 +15,10 @@ public class PersonContact extends Contact {
     @Override
     public String getInfo() {
         return null;
+    }
+
+    @Override
+    public void editInformation() {
+
     }
 }

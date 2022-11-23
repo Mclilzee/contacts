@@ -1,6 +1,6 @@
 package contacts.factory;
 
-import contacts.Contact;
+import contacts.contact.Contact;
 
 public class OrganizationContactFactory implements ContactFactory {
 

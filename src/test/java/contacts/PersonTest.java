@@ -1,5 +1,6 @@
 package contacts;
 
+import contacts.contact.Person;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

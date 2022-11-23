@@ -1,5 +1,9 @@
 package contacts;
 
+import contacts.contact.Contact;
+import contacts.contact.OrganizationContact;
+import contacts.contact.Person;
+import contacts.contact.PersonContact;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,13 +18,12 @@ class PhoneBookTest {
 
     @Test
     void getListReturnsUnmodifiable() {
-        Contact contact = new Contact("John", "Doe", "+0 (123) 12345");
-        assertThrows(UnsupportedOperationException.class, () -> phoneBook.getContacts().add(contact));
+        assertThrows(UnsupportedOperationException.class, () -> phoneBook.getContacts().add(null));
     }
 
     @Test
     void addContact() {
-        Contact contact = new Contact("John", "Doe", "+0 (123) 12345");
+        Contact contact = new OrganizationContact("Pizza", "Street", "+0 (123) 12345");
         phoneBook.addContact(contact);
         assertEquals(1, phoneBook.getContacts().size());
     }
@@ -54,37 +57,6 @@ class PhoneBookTest {
         assertEquals(expected, phoneBook.getRecordsInformation());
     }
 
-    @Test
-    void setFirstNameFirstIndex() {
-        fillContacts();
-        phoneBook.setName(0, "Doll");
-        String expected = "Doll";
-        assertEquals(expected, phoneBook.getContacts().get(0).getName());
-    }
-
-    @Test
-    void setFirstNameLastIndex() {
-        fillContacts();
-        phoneBook.setName(2, "Marksman");
-        String expected = "Marksman";
-        assertEquals(expected, phoneBook.getContacts().get(2).getName());
-    }
-
-    @Test
-    void setSurnameFirstIndex() {
-        fillContacts();
-        phoneBook.setSurname(0, "Doll");
-        String expected = "Doll";
-        assertEquals(expected, phoneBook.getContacts().get(0).getSurname());
-    }
-
-    @Test
-    void setSurnameLastIndex() {
-        fillContacts();
-        phoneBook.setSurname(2, "Marksman");
-        String expected = "Marksman";
-        assertEquals(expected, phoneBook.getContacts().get(2).getSurname());
-    }
 
     @Test
     void setPhoneNumberFirstIndex() {
@@ -124,9 +96,11 @@ class PhoneBookTest {
     }
 
     private void fillContacts() {
-        Contact firstContact = new Contact("John", "Doe", "+0 (123) 12345");
-        Contact secondContact = new Contact("Mark", "Dobless", "+0 (123) 12345");
-        Contact thirdContact = new Contact("Emad", "Doblos", "+0 (123) 12345");
+        Person person = new Person("John", "Doe", "M", "1993-12-12");
+        Contact firstContact = new PersonContact(person , "+0 (123) 12345");
+
+        Contact secondContact = new OrganizationContact("Pizza Shop", "Wall St. 1", "+0 (123) 12345");
+        Contact thirdContact = new OrganizationContact("Game Store", "Gnarren Str. 15", "+0 (123) 12345");
         phoneBook.addContact(firstContact);
         phoneBook.addContact(secondContact);
         phoneBook.addContact(thirdContact);
