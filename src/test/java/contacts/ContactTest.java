@@ -12,6 +12,7 @@ import org.mockito.MockedStatic;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
+import java.util.Scanner;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,6 +23,7 @@ class ContactTest {
 
     private Contact contact = new ContactMock("+0 (123) 456-789-ABcd");
     private static final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    private Scanner scanner = new Scanner("");
 
     @BeforeAll
     static void init() {
@@ -114,7 +116,7 @@ class ContactTest {
 
         try (MockedStatic<LocalDateTime> localDateTimeMock = mockStatic(LocalDateTime.class)) {
             localDateTimeMock.when(LocalDateTime::now).thenReturn(mockTime);
-            contact.editContact();
+            contact.editContact(scanner);
             assertEquals(contact.getLastEdited(), expected);
             assertNotEquals(contact.getCreated(), contact.getLastEdited());
         }
@@ -161,7 +163,7 @@ class ContactTest {
         }
 
         @Override
-        protected void editInformation() {
+        protected void editInformation(Scanner scanner) {
         }
 
         @Override

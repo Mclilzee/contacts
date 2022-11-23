@@ -3,6 +3,8 @@ package contacts.contact;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Scanner;
+
 @Getter @Setter
 public class OrganizationContact extends Contact {
 
@@ -20,7 +22,7 @@ public class OrganizationContact extends Contact {
     }
 
     @Override
-    public void editInformation() {
+    public void editInformation(Scanner scanner) {
 
     }
 

@@ -4,14 +4,15 @@ import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mockStatic;
 
 class PersonContactTest {
     private final Person person = new Person("John", "Doe", "M", "1991-2-12");
     private PersonContact personContact = new PersonContact(person, "123456");
-
+    Scanner scanner = new Scanner("");
 
     @Test
     void getInfoWithCorrectInformation() {
@@ -33,22 +34,22 @@ class PersonContactTest {
         assertEquals(expected, personContact.getInfo());
     }
 
+    @Test
     void getInfoWithCorrectEditDate() {
         LocalDateTime mockDate = LocalDateTime.of(2022, 5, 9, 5, 40, 59, 20);
         LocalDateTime mockEditDate = LocalDateTime.of(2023, 5, 10, 12, 2, 5, 10);
         try (MockedStatic<LocalDateTime> localDateTimeMock = mockStatic(LocalDateTime.class)) {
-            localDateTimeMock.when(LocalDateTime::now).thenReturn(mockDate);
+            localDateTimeMock.when(LocalDateTime::now).thenReturn(mockDate).thenReturn(mockEditDate);
             personContact = new PersonContact(person, "12345");
-            localDateTimeMock.when(LocalDateTime::now).thenReturn(mockEditDate);
-            personContact.setPhoneNumber("123");
+            personContact.editInformation(scanner);
         }
 
         String expected = """
-                Name: John
+                Name: Smith
                 Surname: Doe
                 Birth date: 1991-2-12
                 Gender: M
-                Number: 123
+                Number: 12345
                 Time created: 2022-05-09T05:40:59
                 Time last edit: 2023-05-10T12:02:05
                 """;
@@ -62,8 +63,10 @@ class PersonContactTest {
     }
 
     @Test
-    void editInformation() {
+    void editName() {
+        scanner = new Scanner("name\nAli\n");
+        personContact.editInformation(scanner);
+        String expected = "Ali Doe";
+        assertEquals(expected, personContact.getName());
     }
-
-
 }

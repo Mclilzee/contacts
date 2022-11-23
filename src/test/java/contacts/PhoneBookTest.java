@@ -8,9 +8,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PhoneBookTest {
 
@@ -52,7 +52,7 @@ class PhoneBookTest {
     @Test
     void contactIndexInformationCorrectListReturned() {
         fillContacts();
-        List<String> expected = List.of("1. " + firstContact.getInfo(), "2. " + secondContact.getInfo(), "3. " + thirdContact.getInfo());
+        List<String> expected = List.of("1. " + firstContact.getName(), "2. " + secondContact.getName(), "3. " + thirdContact.getName());
         assertEquals(expected, phoneBook.getContactIndexInformation());
     }
 
@@ -65,8 +65,11 @@ class PhoneBookTest {
     @Test
     void editCorrectContact() {
         fillContacts();
-        phoneBook.editContactInformation(1);
+        assertEquals(firstContact.getName(), phoneBook.getContacts().get(0).getName());
 
+        Scanner scanner = new Scanner("name\nSmith");
+        phoneBook.editContactInformation(0, scanner);
+        assertNotEquals(firstContact.getName(), phoneBook.getContacts().get(0).getName());
     }
 
     @Test
@@ -81,7 +84,7 @@ class PhoneBookTest {
     void removeCorrectContact() {
         fillContacts();
         phoneBook.removeContact(1);
-        List<String> expected = List.of("1. " + firstContact.getInfo(), "2. " + secondContact.getInfo());
+        List<String> expected = List.of("1. " + firstContact.getInfo(), "2. " + thirdContact.getInfo());
 
         assertEquals(expected, phoneBook.getContactIndexInformation());
 

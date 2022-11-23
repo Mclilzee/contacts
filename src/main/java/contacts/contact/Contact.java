@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 @Getter @Setter
@@ -50,14 +51,14 @@ public abstract class Contact {
         return pattern.matcher(phoneNumber).matches();
     }
 
-    public void editContact() {
+    public void editContact(Scanner scanner) {
         lastEdited = LocalDateTime.now().withNano(0);
-        editInformation();
+        editInformation(scanner);
     }
 
     public abstract String getInfo();
 
-    protected abstract void editInformation();
+    protected abstract void editInformation(Scanner scanner);
 
     public abstract String getName();
 }

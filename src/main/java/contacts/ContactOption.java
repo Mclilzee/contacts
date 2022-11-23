@@ -5,29 +5,32 @@ import contacts.factory.ContactFactory;
 import contacts.factory.OrganizationContactFactory;
 import contacts.factory.PersonContactFactory;
 
-import static contacts.util.InputUtil.getInput;
+import java.util.Scanner;
 
 public class ContactOption {
 
     private final PhoneBook phoneBook = new PhoneBook();
     private final ContactFactory personFactory;
     private final ContactFactory organizationFactory;
+    private final Scanner scanner;
 
-    public ContactOption() {
+    public ContactOption(Scanner scanner) {
         this.personFactory = new PersonContactFactory();
         this.organizationFactory = new OrganizationContactFactory();
+        this.scanner = scanner;
     }
 
     public void start() {
         while (true) {
-            switch (getInput("Enter action (add, remove, edit, count, list, exit): ")) {
+            System.out.print("Enter action (add, remove, edit, count, list, exit): ");
+            switch (scanner.nextLine().toLowerCase()) {
                 case "exit":
                     return;
                 case "count":
                     printRecordsCount();
                     break;
                 case "list":
-                    printRecordsList();
+                    printRecordIndexList();
                     break;
                 case "add":
                     addNewContact();
@@ -43,9 +46,10 @@ public class ContactOption {
     }
 
     private void addNewContact() {
-        String type = getInput("Enter the type: (person, organization): ");
+        System.out.print("Enter the type: (person, organization): ");
+        String type = scanner.nextLine().toLowerCase();
         Contact contact;
-        if ("person".equalsIgnoreCase(type)) {
+        if ("person".equals(type)) {
             contact = personFactory.createContact();
         } else {
             contact = organizationFactory.createContact();
@@ -58,7 +62,7 @@ public class ContactOption {
         System.out.println("The Phone Book has " + phoneBook.getContacts().size() + " records.");
     }
 
-    private void printRecordsList() {
+    private void printRecordIndexList() {
         phoneBook.getContactIndexInformation().forEach(System.out::println);
     }
 
@@ -68,10 +72,8 @@ public class ContactOption {
             return;
         }
 
-        printRecordsList();
-        int index = Integer.parseInt(getInput("Select a record: ")) - 1;
-        phoneBook.editContactInformation(index);
-        printUpdatedMessage();
+        phoneBook.editContactInformation(getRecordIndex(), scanner);
+        System.out.println("The record updated!");
     }
 
     private void removeRecord() {
@@ -80,13 +82,13 @@ public class ContactOption {
             return;
         }
 
-        printRecordsList();
-        int index = Integer.parseInt(getInput("Select a record: ")) - 1;
-        phoneBook.removeContact(index);
+        phoneBook.removeContact(getRecordIndex());
         System.out.println("The record removed!");
     }
 
-    private void printUpdatedMessage() {
-        System.out.println("The record updated!");
+    private int getRecordIndex() {
+        printRecordIndexList();
+        System.out.print("Select a record: ");
+        return Integer.parseInt(scanner.nextLine()) - 1;
     }
 }

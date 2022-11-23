@@ -1,6 +1,6 @@
 package contacts.contact;
 
-import contacts.util.InputUtil;
+import java.util.Scanner;
 
 public class PersonContact extends Contact {
 
@@ -37,29 +37,32 @@ public class PersonContact extends Contact {
     }
 
     @Override
-    public void editInformation() {
-        switch (InputUtil.getInput("Select a field (name, surname, birth, gender, number): ").toLowerCase()) {
-            case "name" -> editName();
-            case "surname" -> editSurname();
-            case "birth" -> editBirthDate();
-            case "gender" -> editGender();
-            case "number" -> editNumber();
+    public void editInformation(Scanner scanner) {
+        System.out.print("Select a field (name, surname, birth, gender, number): ");
+        switch (scanner.nextLine().toLowerCase()) {
+            case "name" -> editName(scanner);
+            case "surname" -> editSurname(scanner);
+            case "birth" -> editBirthDate(scanner);
+            case "gender" -> editGender(scanner);
+            case "number" -> editNumber(scanner);
         }
 
     }
 
-    private void editNumber() {
+    private void editNumber(Scanner scanner) {
     }
 
-    private void editGender() {
+    private void editGender(Scanner scanner) {
     }
 
-    private void editBirthDate() {
+    private void editBirthDate(Scanner scanner) {
     }
 
-    private void editSurname() {
+    private void editSurname(Scanner scanner) {
     }
 
-    private void editName() {
+    private void editName(Scanner scanner) {
+        System.out.print("Enter name: ");
+        person.setName(scanner.nextLine());
     }
 }
