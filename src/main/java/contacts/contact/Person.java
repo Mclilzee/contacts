@@ -17,7 +17,7 @@ public class Person {
     private String gender;
     private String birthDate;
 
-    public Person(String name, String surname, String gender, String birthDate) {
+    public Person(String name, String surname, String birthDate, String gender) {
         this.name = name;
         this.surname = surname;
         initGender(gender);

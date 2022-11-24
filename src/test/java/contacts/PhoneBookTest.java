@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PhoneBookTest {
 
-    private final Person person = new Person("John", "Doe", "M", "1993-12-12");
+    private final Person person = new Person("John", "Doe", "1993-12-12", "M");
     private final Contact firstContact = new PersonContact(person , "+0 (123) 12345");
     private final Contact secondContact = new OrganizationContact("Pizza Shop", "Wall St. 1", "+0 (123) 12345");
     private final Contact thirdContact = new OrganizationContact("Game Store", "Gnarren Str. 15", "+0 (123) 12345");

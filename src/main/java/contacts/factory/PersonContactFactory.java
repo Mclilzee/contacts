@@ -15,7 +15,19 @@ public class PersonContactFactory implements ContactFactory {
 
     @Override
     public PersonContact createContact() {
-        return new PersonContact(new Person("John", "doe", "f", "1922"), "123");
+        Person person = createPerson();
+
+        String phoneNumber = scanner.nextLine();
+        return new PersonContact(person, phoneNumber);
+    }
+
+    private Person createPerson() {
+        String name = scanner.nextLine();
+        String surname = scanner.nextLine();
+        String birthDate = scanner.nextLine();
+        String gender = scanner.nextLine();
+
+        return new Person(name, surname, birthDate, gender);
     }
 
 }

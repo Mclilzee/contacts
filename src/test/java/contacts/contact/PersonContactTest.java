@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mockStatic;
 
 class PersonContactTest {
-    private final Person person = new Person("John", "Doe", "M", "1991-2-12");
+    private final Person person = new Person("John", "Doe", "1991-2-12", "M");
     private PersonContact personContact = new PersonContact(person, "12345");
     Scanner scanner = new Scanner("");
     private static final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

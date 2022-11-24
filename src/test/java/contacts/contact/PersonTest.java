@@ -1,6 +1,5 @@
 package contacts.contact;
 
-import contacts.contact.Person;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PersonTest {
 
-    private Person person = new Person("John", "Doe", "M", "1992-2-3");
+    private Person person = new Person("John", "Doe", "1992-2-3", "M");
 
     private final static ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
@@ -51,7 +50,7 @@ class PersonTest {
     @MethodSource("correctGenderProvider")
     void initWithCorrectGender(String gender) {
         String expected = gender.toUpperCase();
-        person = new Person("John", "Doe", gender, "1992-2-3");
+        person = new Person("John", "Doe", "1992-2-3", gender);
         assertEquals(expected, person.getGender());
         assertEquals("", outputStream.toString());
     }
@@ -59,7 +58,7 @@ class PersonTest {
     @ParameterizedTest
     @MethodSource("correctGenderProvider")
     void setCorrectGender(String gender) {
-        person = new Person("John", "Doe", "F", "1992-2-3");
+        person = new Person("John", "Doe", "1992-2-3", "F");
         person.initGender(gender);
         assertEquals(gender.toUpperCase(), person.getGender());
         assertEquals("", outputStream.toString());
@@ -69,7 +68,7 @@ class PersonTest {
     @ParameterizedTest
     @MethodSource("wrongGenderProvider")
     void initWithWrongGender(String gender) {
-        person = new Person("John", "Doe", gender, "1993-1-1");
+        person = new Person("John", "Doe", "1993-1-1", gender);
         String expected = "[no data]";
         assertEquals(expected, person.getGender());
 
@@ -80,7 +79,7 @@ class PersonTest {
     @ParameterizedTest
     @MethodSource("wrongGenderProvider")
     void setWrongGender(String gender) {
-        person = new Person("John", "Doe", "F", "1993-1-1");
+        person = new Person("John", "Doe", "1993-1-1", "F");
         person.setGender(gender);
         String expected = gender == null ? "" : gender.toUpperCase();
         assertEquals(expected, person.getGender());
@@ -98,7 +97,7 @@ class PersonTest {
     @ParameterizedTest
     @MethodSource("correctDateProvider")
     void initWithCorrectDates(String date) {
-        person = new Person("John", "Doe", "F", date);
+        person = new Person("John", "Doe", date, "F");
         assertEquals(date, person.getBirthDate());
         assertEquals("", outputStream.toString());
     }
@@ -114,7 +113,7 @@ class PersonTest {
     @ParameterizedTest
     @MethodSource("wrongDateProvider")
     void initWithWrongBirthDate(String date) {
-        person = new Person("John", "Doe", "F", date);
+        person = new Person("John", "Doe", date, "F");
         String expected = "[no data]";
         assertEquals(expected, person.getBirthDate());
     }
