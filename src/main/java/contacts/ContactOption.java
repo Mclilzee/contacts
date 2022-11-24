@@ -22,31 +22,31 @@ public class ContactOption {
 
     public void start() {
         while (true) {
-            System.out.print("Enter action (add, remove, edit, count, list, exit): ");
+            System.out.print("Enter action (add, remove, edit, count, info, exit): ");
             switch (scanner.nextLine().toLowerCase()) {
                 case "exit":
                     return;
                 case "count":
-                    printRecordsCount();
+                    printContactsCount();
                     break;
                 case "info":
-                    printRecordIndexList();
+                    printContactInfo();
                     break;
                 case "add":
                     addNewContact();
                     break;
                 case "edit":
-                    editRecordsInstructions();
+                    editContactsInstructions();
                     break;
                 case "remove":
-                    removeRecord();
+                    removeContact();
                     break;
             }
         }
     }
 
     private void addNewContact() {
-        System.out.print("Enter the type: (person, organization): ");
+        System.out.print("Enter the type (person, organization): ");
         String type = scanner.nextLine().toLowerCase();
         Contact contact;
         if ("person".equals(type)) {
@@ -58,36 +58,43 @@ public class ContactOption {
         phoneBook.addContact(contact);
     }
 
-    private void printRecordsCount() {
+    private void printContactsCount() {
         System.out.println("The Phone Book has " + phoneBook.getContacts().size() + " records.");
     }
 
-    private void printRecordIndexList() {
+    private void printContactIndexList() {
         phoneBook.getContactIndexInformation().forEach(System.out::println);
     }
 
-    private void editRecordsInstructions() {
+    private void printContactInfo() {
+        printContactIndexList();
+
+        int index = getContactIndex();
+        phoneBook.getContactInformation(index);
+    }
+
+    private void editContactsInstructions() {
         if (phoneBook.getContacts().isEmpty()) {
             System.out.println("No records to edit!");
             return;
         }
 
-        phoneBook.editContactInformation(getRecordIndex(), scanner);
+        phoneBook.editContactInformation(getContactIndex(), scanner);
         System.out.println("The record updated!");
     }
 
-    private void removeRecord() {
+    private void removeContact() {
         if (phoneBook.getContacts().isEmpty()) {
             System.out.println("No records to remove!");
             return;
         }
 
-        phoneBook.removeContact(getRecordIndex());
+        phoneBook.removeContact(getContactIndex());
         System.out.println("The record removed!");
     }
 
-    private int getRecordIndex() {
-        printRecordIndexList();
+    private int getContactIndex() {
+        printContactIndexList();
         System.out.print("Select a record: ");
         return Integer.parseInt(scanner.nextLine()) - 1;
     }
