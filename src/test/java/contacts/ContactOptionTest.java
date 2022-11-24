@@ -2,6 +2,7 @@ package contacts;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -46,6 +47,12 @@ class ContactOptionTest {
     }
 
     @Test
+    void optionsExitCorrectly() {
+        generateContactOptionInputs("exit\n");
+        contactOption.start();
+    }
+
+    @Test
     void optionsAreCaseInsensitive() {
         generateContactOptionInputs("eXIt\n");
         contactOption.start();
@@ -81,6 +88,31 @@ class ContactOptionTest {
                 "Select a record: " +
                 "The record removed!\r\n" +
                 MAIN_INSTRUCTIONS;
+        assertEquals(expectedOutput, outputStream.toString());
+    }
+
+    @Test
+    @DisplayName("Remove contact when list is empty show correct output")
+    void removeEmptyContact() {
+        generateContactOptionInputs("remove\nexit\n");
+        contactOption.start();
+        String outputExpected = MAIN_INSTRUCTIONS + "No records to remove!\r\n" + MAIN_INSTRUCTIONS;
+        assertEquals(outputExpected, outputStream.toString());
+    }
+
+    @Test
+    void countContactOutputCorrectInstructions() {
+        generateContactOptionInputs("count\nexit\n");
+        contactOption.start();
+        String expectedOutput = MAIN_INSTRUCTIONS + "The Phone Book has 0 records.\r\n" + MAIN_INSTRUCTIONS;
+        assertEquals(expectedOutput, outputStream.toString());
+    }
+
+    @Test
+    void showContactInfoOutputCorrectInstructions() {
+        generateContactOptionInputs("info\nexit\n");
+        contactOption.start();
+        String expectedOutput = MAIN_INSTRUCTIONS + "No records to show!\r\n" + MAIN_INSTRUCTIONS;
         assertEquals(expectedOutput, outputStream.toString());
     }
 
