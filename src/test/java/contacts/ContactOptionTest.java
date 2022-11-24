@@ -28,12 +28,14 @@ class ContactOptionTest {
             "Enter the birth date: " +
             "Enter the gender: " +
             "Enter the number: " +
+            "The record added.\r\n\r\n" +
             MAIN_INSTRUCTIONS;
 
     private final String ADDING_ORGANIZATION_CONTACT_INSTRUCTIONS = TYPE_INSTRUCTIONS +
             "Enter the organization name: " +
             "Enter the address: " +
             "Enter the number: " +
+            "The record added.\r\n\r\n" +
             MAIN_INSTRUCTIONS;
 
     @BeforeAll
@@ -81,7 +83,7 @@ class ContactOptionTest {
     void removeEmptyContact() {
         generateContactOptionInputs("remove\nexit\n");
         contactOption.start();
-        String outputExpected = MAIN_INSTRUCTIONS + "No records to remove!\r\n" + MAIN_INSTRUCTIONS;
+        String outputExpected = MAIN_INSTRUCTIONS + "No records to remove!\r\n\r\n" + MAIN_INSTRUCTIONS;
         assertEquals(outputExpected, outputStream.toString());
     }
 
@@ -98,7 +100,7 @@ class ContactOptionTest {
                 "1. John Doe\r\n" +
                 "2. Pizza Store\r\n" +
                 "Select a record: " +
-                "The record removed!\r\n" +
+                "The record removed!\r\n\r\n" +
                 MAIN_INSTRUCTIONS;
         assertEquals(expectedOutput, outputStream.toString());
     }
@@ -108,7 +110,7 @@ class ContactOptionTest {
     void countEmptyContacts() {
         generateContactOptionInputs("count\nexit\n");
         contactOption.start();
-        String expectedOutput = MAIN_INSTRUCTIONS + "The Phone Book has 0 records.\r\n" + MAIN_INSTRUCTIONS;
+        String expectedOutput = MAIN_INSTRUCTIONS + "The Phone Book has 0 records.\r\n\r\n" + MAIN_INSTRUCTIONS;
         assertEquals(expectedOutput, outputStream.toString());
     }
 
@@ -119,7 +121,7 @@ class ContactOptionTest {
         contactOption.start();
         String expectedOutput = MAIN_INSTRUCTIONS +
                 ADDING_PERSON_CONTACT_INSTRUCTIONS +
-                "The Phone Book has 1 records.\r\n" +
+                "The Phone Book has 1 records.\r\n\r\n" +
                 MAIN_INSTRUCTIONS;
         assertEquals(expectedOutput, outputStream.toString());
     }
@@ -129,7 +131,7 @@ class ContactOptionTest {
     void showEmptyContactInfo() {
         generateContactOptionInputs("info\nexit\n");
         contactOption.start();
-        String expectedOutput = MAIN_INSTRUCTIONS + "No records to show!\r\n" + MAIN_INSTRUCTIONS;
+        String expectedOutput = MAIN_INSTRUCTIONS + "No records to show!\r\n\r\n" + MAIN_INSTRUCTIONS;
         assertEquals(expectedOutput, outputStream.toString());
     }
 
@@ -154,7 +156,7 @@ class ContactOptionTest {
     void editEmptyContacts() {
         generateContactOptionInputs("edit\nexit\n");
         contactOption.start();
-        String expectedOutput = MAIN_INSTRUCTIONS + "No records to edit!\r\n" + MAIN_INSTRUCTIONS;
+        String expectedOutput = MAIN_INSTRUCTIONS + "No records to edit!\r\n\r\n" + MAIN_INSTRUCTIONS;
         assertEquals(expectedOutput, outputStream.toString());
     }
 
@@ -170,7 +172,7 @@ class ContactOptionTest {
                 "Select a record: " +
                 "Select a field (name, surname, birth, gender, number): " +
                 "Enter number: " +
-                "The record updated!\r\n" +
+                "The record updated!\r\n\r\n" +
                 MAIN_INSTRUCTIONS;
         assertEquals(expectedOutput, outputStream.toString());
 

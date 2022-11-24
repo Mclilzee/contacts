@@ -42,6 +42,7 @@ public class ContactOption {
                     removeContact();
                     break;
             }
+            System.out.println();
         }
     }
 
@@ -56,6 +57,7 @@ public class ContactOption {
         }
 
         phoneBook.addContact(contact);
+        System.out.println("The record added.");
     }
 
     private void printContactsCount() {
