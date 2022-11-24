@@ -22,7 +22,7 @@ class ContactOptionTest {
 
     private final String MAIN_INSTRUCTIONS = "Enter action (add, remove, edit, count, info, exit): ";
 
-    private final String ADDING_PERSON_CONTACT_INSTRUCTIONS =  TYPE_INSTRUCTIONS +
+    private final String ADDING_PERSON_CONTACT_INSTRUCTIONS = TYPE_INSTRUCTIONS +
             "Enter the name: " +
             "Enter the surname: " +
             "Enter the birth date: " +
@@ -103,7 +103,6 @@ class ContactOptionTest {
         assertEquals(expectedOutput, outputStream.toString());
     }
 
-
     @Test
     @DisplayName("Counting contacts when list is empty output correct message")
     void countEmptyContacts() {
@@ -116,13 +115,13 @@ class ContactOptionTest {
     @Test
     @DisplayName("Counting contacts output correct message")
     void countContacts() {
-       generateContactOptionInputs(ADDING_PERSON_CONTACT_INPUT + "count\nexit\n");
-       contactOption.start();
-       String expectedOutput = MAIN_INSTRUCTIONS +
-               ADDING_PERSON_CONTACT_INSTRUCTIONS +
-               "The Phone Book has 1 records.\r\n" +
-               MAIN_INSTRUCTIONS;
-       assertEquals(expectedOutput, outputStream.toString());
+        generateContactOptionInputs(ADDING_PERSON_CONTACT_INPUT + "count\nexit\n");
+        contactOption.start();
+        String expectedOutput = MAIN_INSTRUCTIONS +
+                ADDING_PERSON_CONTACT_INSTRUCTIONS +
+                "The Phone Book has 1 records.\r\n" +
+                MAIN_INSTRUCTIONS;
+        assertEquals(expectedOutput, outputStream.toString());
     }
 
     @Test
@@ -148,6 +147,32 @@ class ContactOptionTest {
                 "Number: 0152221\n" +
                 "Time created: ";
         assertTrue(outputStream.toString().startsWith(expectedOutput));
+    }
+
+    @Test
+    @DisplayName("Edit empty contact list will output correct message")
+    void editEmptyContacts() {
+        generateContactOptionInputs("edit\nexit\n");
+        contactOption.start();
+        String expectedOutput = MAIN_INSTRUCTIONS + "No records to edit!\r\n" + MAIN_INSTRUCTIONS;
+        assertEquals(expectedOutput, outputStream.toString());
+    }
+
+    @Test
+    @DisplayName("Edit contact will output the correct message")
+    void editContacts() {
+        generateContactOptionInputs(ADDING_PERSON_CONTACT_INPUT + "edit\n1\nnumber\n123\nexit\n");
+        contactOption.start();
+
+        String expectedOutput = MAIN_INSTRUCTIONS +
+                ADDING_PERSON_CONTACT_INSTRUCTIONS +
+                "1. John Doe\r\n" +
+                "Select a record: " +
+                "Select a field (name, surname, birth, gender, number): " +
+                "Enter number: " +
+                "The record updated!\r\n" +
+                MAIN_INSTRUCTIONS;
+        assertEquals(expectedOutput, outputStream.toString());
 
     }
 
