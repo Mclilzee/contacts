@@ -26,6 +26,13 @@ class PersonContactFactoryTest {
     }
 
     @Test
+    void outputCorrectInstructions() {
+        contact = getContactFromInput("John\nDoe\n1992-1-1\nM\n12345\n");
+        String expectedOutput = "Enter the name: Enter the surname: Enter the birth date: Enter the gender: Enter the number: ";
+        assertEquals(expectedOutput, outputStream.toString());
+    }
+
+    @Test
     void contactHasCorrectName() {
         contact = getContactFromInput("John\nDoe\n1992-1-1\nM\n+0 (123) 123-1412-999");
         String expectedName = "John";
