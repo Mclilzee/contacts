@@ -72,10 +72,9 @@ public class ContactOption {
             return;
         }
 
-        printContactIndexList();
-
-        int index = getContactIndex("Enter index to show info: ");
-        phoneBook.getContactInformation(index);
+        int index = getContactIndex();
+        String info = phoneBook.getContactInformation(index);
+        System.out.println(info);
     }
 
     private void editContactsInstructions() {
@@ -84,7 +83,7 @@ public class ContactOption {
             return;
         }
 
-        phoneBook.editContactInformation(getContactIndex("Select a record: "), scanner);
+        phoneBook.editContactInformation(getContactIndex(), scanner);
         System.out.println("The record updated!");
     }
 
@@ -94,13 +93,13 @@ public class ContactOption {
             return;
         }
 
-        phoneBook.removeContact(getContactIndex("Select a record: "));
+        phoneBook.removeContact(getContactIndex());
         System.out.println("The record removed!");
     }
 
-    private int getContactIndex(String message) {
+    private int getContactIndex() {
         printContactIndexList();
-        System.out.print(message);
+        System.out.print("Select a record: ");
         return Integer.parseInt(scanner.nextLine()) - 1;
     }
 }

@@ -59,7 +59,8 @@ class ContactOptionTest {
     }
 
     @Test
-    void addPersonContactOutputCorrectInstructions() {
+    @DisplayName("Adding person contact output correct instructions")
+    void addPersonContact() {
         generateContactOptionInputs(ADDING_PERSON_CONTACT_INPUT + "exit\n");
         contactOption.start();
         String expectedOutput = MAIN_INSTRUCTIONS + ADDING_PERSON_CONTACT_INSTRUCTIONS;
@@ -67,7 +68,8 @@ class ContactOptionTest {
     }
 
     @Test
-    void addOrganizationContactOutputCorrectInstructions() {
+    @DisplayName("Adding organization contact output correct instructions")
+    void addOrganizationContact() {
         generateContactOptionInputs(ADDING_ORGANIZATION_CONTACT_INPUT + "exit\n");
         contactOption.start();
         String expectedOutput = MAIN_INSTRUCTIONS + ADDING_ORGANIZATION_CONTACT_INSTRUCTIONS;
@@ -75,7 +77,17 @@ class ContactOptionTest {
     }
 
     @Test
-    void removeContactOutputCorrectInstructions() {
+    @DisplayName("Remove contact when list is empty show correct output")
+    void removeEmptyContact() {
+        generateContactOptionInputs("remove\nexit\n");
+        contactOption.start();
+        String outputExpected = MAIN_INSTRUCTIONS + "No records to remove!\r\n" + MAIN_INSTRUCTIONS;
+        assertEquals(outputExpected, outputStream.toString());
+    }
+
+    @Test
+    @DisplayName("Remove contact return correct output message")
+    void removeContact() {
         generateContactOptionInputs(ADDING_PERSON_CONTACT_INPUT + ADDING_ORGANIZATION_CONTACT_INPUT +
                 "remove\n1\nexit\n");
         contactOption.start();
@@ -91,17 +103,10 @@ class ContactOptionTest {
         assertEquals(expectedOutput, outputStream.toString());
     }
 
-    @Test
-    @DisplayName("Remove contact when list is empty show correct output")
-    void removeEmptyContact() {
-        generateContactOptionInputs("remove\nexit\n");
-        contactOption.start();
-        String outputExpected = MAIN_INSTRUCTIONS + "No records to remove!\r\n" + MAIN_INSTRUCTIONS;
-        assertEquals(outputExpected, outputStream.toString());
-    }
 
     @Test
-    void countContactOutputCorrectInstructions() {
+    @DisplayName("Counting contacts when list is empty output correct message")
+    void countEmptyContacts() {
         generateContactOptionInputs("count\nexit\n");
         contactOption.start();
         String expectedOutput = MAIN_INSTRUCTIONS + "The Phone Book has 0 records.\r\n" + MAIN_INSTRUCTIONS;
@@ -109,11 +114,44 @@ class ContactOptionTest {
     }
 
     @Test
-    void showContactInfoOutputCorrectInstructions() {
+    @DisplayName("Counting contacts output correct message")
+    void countContacts() {
+       generateContactOptionInputs(ADDING_PERSON_CONTACT_INPUT + "count\nexit\n");
+       contactOption.start();
+       String expectedOutput = MAIN_INSTRUCTIONS +
+               ADDING_PERSON_CONTACT_INSTRUCTIONS +
+               "The Phone Book has 1 records.\r\n" +
+               MAIN_INSTRUCTIONS;
+       assertEquals(expectedOutput, outputStream.toString());
+    }
+
+    @Test
+    @DisplayName("Show contact info when list is empty output correct message")
+    void showEmptyContactInfo() {
         generateContactOptionInputs("info\nexit\n");
         contactOption.start();
         String expectedOutput = MAIN_INSTRUCTIONS + "No records to show!\r\n" + MAIN_INSTRUCTIONS;
         assertEquals(expectedOutput, outputStream.toString());
+    }
+
+    @Test
+    @DisplayName("Show contact info output correct message")
+    void showContactInfo() {
+        generateContactOptionInputs(ADDING_ORGANIZATION_CONTACT_INPUT + "info\n1\nexit\n");
+        contactOption.start();
+        String expectedOutput = MAIN_INSTRUCTIONS +
+                ADDING_ORGANIZATION_CONTACT_INSTRUCTIONS +
+                "1. Pizza Store\r\n" +
+                "Select a record: " +
+                "Organization name: Pizza Store\n" +
+                "Address: Wall St. 1\n" +
+                "Number: 0152221\n" +
+                "Time created: .*\n" +
+                "Time last edit: .*\n" +
+                MAIN_INSTRUCTIONS;
+        String output = outputStream.toString();
+        assertTrue(outputStream.toString().matches(expectedOutput));
+
     }
 
     private void generateContactOptionInputs(String input) {
