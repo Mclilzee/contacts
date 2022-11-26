@@ -21,15 +21,15 @@ public class ContactOption {
 
     public void start() {
         while (true) {
-            System.out.print("Enter action (add, remove, edit, count, info, exit): ");
+            System.out.print("[menu] Enter action (add, list, search, count, exit): ");
             switch (scanner.nextLine().toLowerCase()) {
                 case "exit":
                     return;
                 case "count":
                     printContactsCount();
                     break;
-                case "info":
-                    printContactInfo();
+                case "list":
+                    ContactPrinter.printIndexList(phoneBook.getContacts());
                     break;
                 case "add":
                     addNewContact();

@@ -21,7 +21,7 @@ class ContactOptionTest {
     private final String ADDING_ORGANIZATION_CONTACT_INPUT = "add\norganization\nPizza Store\nWall St. 1\n0152221\n";
     private final String TYPE_INSTRUCTIONS = "Enter the type (person, organization): ";
 
-    private final String MAIN_INSTRUCTIONS = "Enter action (add, remove, edit, count, info, exit): ";
+    private final String MAIN_INSTRUCTIONS = "[menu] Enter action (add, list, search, count, exit): ";
 
     private final String ADDING_PERSON_CONTACT_INSTRUCTIONS = TYPE_INSTRUCTIONS +
             "Enter the name: " +
@@ -128,28 +128,26 @@ class ContactOptionTest {
     }
 
     @Test
-    @DisplayName("Show contact info when list is empty output correct message")
+    @DisplayName("Show contact list when list is empty output correct message")
     void showEmptyContactInfo() {
-        generateContactOptionInputs("info\nexit\n");
+        generateContactOptionInputs("list\nexit\n");
         contactOption.start();
         String expectedOutput = MAIN_INSTRUCTIONS + "No records to show!\r\n\r\n" + MAIN_INSTRUCTIONS;
         assertEquals(expectedOutput, outputStream.toString());
     }
 
     @Test
-    @DisplayName("Show contact info output correct message")
+    @DisplayName("Show contact list output correct message")
     void showContactInfo() {
-        generateContactOptionInputs(ADDING_ORGANIZATION_CONTACT_INPUT + "info\n1\nexit\n");
+        generateContactOptionInputs(ADDING_ORGANIZATION_CONTACT_INPUT + ADDING_PERSON_CONTACT_INPUT + "list\nexit\n");
         contactOption.start();
         String expectedOutput = MAIN_INSTRUCTIONS +
                 ADDING_ORGANIZATION_CONTACT_INSTRUCTIONS +
+                ADDING_PERSON_CONTACT_INSTRUCTIONS +
                 "1. Pizza Store\r\n" +
-                "Select a record: " +
-                "Organization name: Pizza Store\n" +
-                "Address: Wall St. 1\n" +
-                "Number: 0152221\n" +
-                "Time created: ";
-        assertTrue(outputStream.toString().startsWith(expectedOutput));
+                "2. John Doe\r\n\r\n" +
+                MAIN_INSTRUCTIONS;
+        assertEquals(expectedOutput, outputStream.toString());
     }
 
     @Test

@@ -43,6 +43,14 @@ class ContactPrinterTest {
     }
 
     @Test
+    void printContactIndexIfEmptY() {
+        ContactPrinter.printIndexList(List.of());
+
+        String expected = "No records to show!\r\n";
+        assertEquals(expected, outputStream.toString());
+    }
+
+    @Test
     void printContactInfo() {
         ContactPrinter.printContactInfo(contacts, 1);
 
