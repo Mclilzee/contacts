@@ -29,16 +29,6 @@ public class DiskPhoneBook implements PhoneBook {
     }
 
     @Override
-    public List<String> getContactIndexInformation() {
-        return null;
-    }
-
-    @Override
-    public String getContactInformation(int index) {
-        return null;
-    }
-
-    @Override
     public void editContactInformation(int i, Scanner scanner) {
 
     }

@@ -11,10 +11,6 @@ public interface PhoneBook {
 
     List<Contact> getContacts();
 
-    List<String> getContactIndexInformation();
-
-    String getContactInformation(int index);
-
     void editContactInformation(int i, Scanner scanner);
 
     void removeContact(int index);
