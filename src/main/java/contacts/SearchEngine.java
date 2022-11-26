@@ -54,26 +54,4 @@ public class SearchEngine {
             ContactPrinter.printContactInfo(contacts, index);
         }
     }
-//
-//    private void editContactsInstructions() {
-//        List<Contact> contacts = phoneBook.getContacts();
-//        if (contacts.isEmpty()) {
-//            System.out.println("No records to edit!");
-//            return;
-//        }
-//
-//        phoneBook.editContactInformation(getContactIndex(contacts), scanner);
-//        System.out.println("The record updated!");
-//    }
-//
-//    private void removeContact() {
-//        List<Contact> contacts = phoneBook.getContacts();
-//        if (contacts.isEmpty()) {
-//            System.out.println("No records to remove!");
-//            return;
-//        }
-//
-//        phoneBook.removeContact(getContactIndex(contacts));
-//        System.out.println("The record removed!");
-//    }
 }

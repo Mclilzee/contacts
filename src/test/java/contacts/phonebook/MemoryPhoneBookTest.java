@@ -3,7 +3,6 @@ package contacts.phonebook;
 import contacts.contact.OrganizationContact;
 import contacts.contact.Person;
 import contacts.contact.PersonContact;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -49,15 +48,16 @@ class MemoryPhoneBookTest {
 
     @Test
     void editCorrectContact() {
-        phonebook.addContact(new PersonContact(new Person("John", "Doe", "1993-12-12", "M"),
-                "+0 (123) 12345"));
+        PersonContact contact = new PersonContact(new Person("John", "Doe", "1993-12-12", "M"),
+                "+0 (123) 12345");
+        phonebook.addContact(contact);
         phonebook.addContact(new OrganizationContact("Pizza Shop", "Wall St. 1", "+0 (123) 12345"));
         phonebook.addContact(new OrganizationContact("Game Store", "Gnarren Str. 15", "+0 (123) 12345"));
         String expectedBeforeChange = "John Doe";
         assertEquals(expectedBeforeChange, phonebook.getContacts().get(0).getFullName());
 
         Scanner scanner = new Scanner("name\nSmith");
-        phonebook.editContactInformation(0, scanner);
+        phonebook.editContactInformation(contact, scanner);
 
         String expectedAfterChange = "Smith Doe";
         assertEquals(expectedAfterChange, phonebook.getContacts().get(0).getFullName());

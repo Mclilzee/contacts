@@ -29,9 +29,9 @@ public class DiskPhoneBook implements PhoneBook {
     }
 
     @Override
-    public void editContactInformation(int index, Scanner scanner) {
+    public void editContactInformation(Contact contact, Scanner scanner) {
         List<Contact> contacts = SerializerUtil.readContacts(file);
-        contacts.get(index).editContact(scanner);
+        contacts.get(contacts.indexOf(contact)).editContact(scanner);
         SerializerUtil.writeContacts(contacts, file);
     }
 

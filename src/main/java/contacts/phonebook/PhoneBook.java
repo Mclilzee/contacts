@@ -11,7 +11,7 @@ public interface PhoneBook {
 
     List<Contact> getContacts();
 
-    void editContactInformation(int i, Scanner scanner);
+    void editContactInformation(Contact contact, Scanner scanner);
 
     void removeContact(Contact contact);
 }

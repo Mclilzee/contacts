@@ -59,10 +59,12 @@ class DiskPhoneBookTest {
     @Test
     void editTheCorrectContact() {
         Contact contact = new OrganizationContact("Pizza Store", "Wall str 1", "123");
+        Contact secondContact = new OrganizationContact("Pizza Store", "Wall str 1", "123");
         phoneBook.addContact(contact);
-        phoneBook.addContact(contact);
+        phoneBook.addContact(secondContact);
 
-        phoneBook.editContactInformation(1, new Scanner("number\n2222\n"));
+
+        phoneBook.editContactInformation(secondContact, new Scanner("number\n2222\n"));
 
         List<Contact> contacts = phoneBook.getContacts();
         String expected = "2222";
@@ -73,10 +75,12 @@ class DiskPhoneBookTest {
     @Test
     void editedContactPersistInDatabase() {
         Contact contact = new OrganizationContact("Pizza Store", "Wall str 1", "123");
+        Contact secondContact = new OrganizationContact("Pizza Store", "Wall str 1", "123");
         phoneBook.addContact(contact);
-        phoneBook.addContact(contact);
+        phoneBook.addContact(secondContact);
 
-        phoneBook.editContactInformation(1, new Scanner("number\n2222\n"));
+
+        phoneBook.editContactInformation(secondContact, new Scanner("number\n2222\n"));
         phoneBook = new DiskPhoneBook(file);
 
         List<Contact> contacts = phoneBook.getContacts();

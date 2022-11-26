@@ -24,8 +24,8 @@ public class MemoryPhoneBook implements PhoneBook {
     }
 
     @Override
-    public void editContactInformation(int i, Scanner scanner) {
-        contacts.get(i).editContact(scanner);
+    public void editContactInformation(Contact contact, Scanner scanner) {
+        contact.editContact(scanner);
     }
 
     @Override
