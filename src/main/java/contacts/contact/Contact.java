@@ -2,7 +2,9 @@ package contacts.contact;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Scanner;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 public abstract class Contact implements Serializable {
@@ -18,11 +20,13 @@ public abstract class Contact implements Serializable {
     private String phoneNumber;
     private LocalDateTime createdDateTime;
     private LocalDateTime lastEditedDateTime;
+    private final UUID id;
 
     public Contact(String phoneNumber) {
         LocalDateTime current = LocalDateTime.now().withNano(0);
         createdDateTime = current;
         lastEditedDateTime = current;
+        id = UUID.randomUUID();
 
         if (isValidPhoneNumber(phoneNumber)) {
             this.phoneNumber = phoneNumber;
@@ -31,8 +35,6 @@ public abstract class Contact implements Serializable {
             System.out.println("Wrong number format!");
         }
     }
-
-    public Contact() {}
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -64,6 +66,19 @@ public abstract class Contact implements Serializable {
     public void editContact(Scanner scanner) {
         lastEditedDateTime = LocalDateTime.now().withNano(0);
         editInformation(scanner);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Contact contact = (Contact) o;
+        return Objects.equals(id, contact.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     public abstract String getInfo();

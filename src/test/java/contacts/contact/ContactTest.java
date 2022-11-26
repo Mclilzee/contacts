@@ -13,6 +13,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.util.Scanner;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,6 +39,27 @@ class ContactTest {
     void getCorrectName() {
         String expected = "Mock Contact";
         assertEquals(expected, contact.getFullName());
+    }
+
+    @Test
+    void testContactEquality() {
+        Contact contact = new ContactMock("123");
+        Contact secondContact = new ContactMock("123");
+
+        assertNotEquals(contact, secondContact);
+    }
+
+    @Test
+    @DisplayName("Contacts should be equal if they have same unique id")
+    void testContactAreEqual() {
+        UUID id = UUID.fromString("8ba02d28-2eab-42d5-8afb-ffab3cc0c803");
+        try (MockedStatic<UUID> uuidMock = mockStatic(UUID.class)) {
+            uuidMock.when(UUID::randomUUID).thenReturn(id);
+            Contact firstContact = new ContactMock("1233");
+            Contact secondContact = new ContactMock("2222");
+
+            assertEquals(firstContact, secondContact);
+        }
     }
 
     @ParameterizedTest
