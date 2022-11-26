@@ -15,7 +15,24 @@ public class ContactEditor {
         this.phoneBook = phoneBook;
         this.contact = contact;
         this.scanner = scanner;
+        System.out.println(contact.getInfo());
+        action();
+    }
 
+    private void action() {
+        while (true) {
+            System.out.print("[record] Enter action (edit, delete, menu): ");
+            switch (scanner.nextLine().toLowerCase()) {
+                case "edit":
+                    editContactsInstructions();
+                    break;
+                case "delete":
+                    removeContact();
+                    return;
+                case "menu":
+                    return;
+            }
+        }
     }
 
     private void editContactsInstructions() {

@@ -42,7 +42,38 @@ class ContactEditorTest {
     void printCorrectContactInformation() {
         generateContactEditorWithInput("menu\n", firstContact);
 
-        assertEquals(firstContact.getInfo(), outputStream.toString());
+        String expected = firstContact.getInfo() +
+                "\r\n" +
+                "[record] Enter action (edit, delete, menu): ";
+        assertEquals(expected, outputStream.toString());
+    }
+
+    @Test
+    void outputCorrectMessage() {
+        generateContactEditorWithInput("delete\n", secondContact);
+
+        String expectedOutput = secondContact.getInfo() +
+                "\r\n" +
+                "[record] Enter action (edit, delete, menu): The record removed!\r\n";
+
+        assertEquals(expectedOutput, outputStream.toString());
+    }
+
+    @Test
+    void handleRemoveInputCorrectly() {
+        generateContactEditorWithInput("delete\n", secondContact);
+
+        int expectedRecordsNumber = 2;
+        assertEquals(expectedRecordsNumber, phoneBook.getContacts().size());
+    }
+
+    @Test
+    void removeCorrectRecord() {
+        generateContactEditorWithInput("delete\n", secondContact);
+
+        int expected = -1;
+
+        assertEquals(expected, phoneBook.getContacts().indexOf(secondContact));
     }
 
     void generateContactEditorWithInput(String input, Contact contact) {
