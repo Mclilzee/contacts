@@ -15,6 +15,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SearchEngineTest {
 
@@ -42,10 +43,11 @@ public class SearchEngineTest {
     @DisplayName("Search return correct contacts")
     void searchContact() {
         generateSearchEngineFromInput("e\nback\n");
+        searchEngine.search();
 
         String expectedOutput = "Enter search query: " +
-                "Found 3 result:\r\n" +
-                "1. Game Str\r\n" +
+                "Found 3 result: \r\n" +
+                "1. Game\r\n" +
                 "2. John Doe\r\n" +
                 "3. Pizza doe\r\n\r\n" +
                "[search] Enter action ([number], back, again): ";
@@ -54,26 +56,81 @@ public class SearchEngineTest {
     }
 
     @Test
-    @DisplayName("Remove contact when list is empty show correct output")
-    void removeEmptyContact() {
+    @DisplayName("Search return correct contacts using regex")
+    void searchSupportRegex() {
+        generateSearchEngineFromInput(".*\nback\n");
+        searchEngine.search();
 
+        String expectedOutput = "Enter search query: " +
+                "Found 5 result: \r\n" +
+                "1. Pizza\r\n" +
+                "2. Game\r\n" +
+                "3. Sky\r\n" +
+                "4. John Doe\r\n" +
+                "5. Pizza doe\r\n\r\n" +
+                "[search] Enter action ([number], back, again): ";
+
+        assertEquals(expectedOutput, outputStream.toString());
     }
 
     @Test
-    @DisplayName("Remove contact return correct output message")
-    void removeContact() {
+    @DisplayName("Search is case insensitive")
+    void searchRegexCaseInsensitive() {
+        generateSearchEngineFromInput("doe$\nback\n");
+        searchEngine.search();
 
+        String expectedOutput = "Enter search query: " +
+                "Found 2 result: \r\n" +
+                "1. John Doe\r\n" +
+                "2. Pizza doe\r\n\r\n" +
+                "[search] Enter action ([number], back, again): ";
+
+        assertEquals(expectedOutput, outputStream.toString());
     }
 
 
     @Test
-    @DisplayName("Edit empty contact list will output correct message")
-    void editEmptyContacts() {
+    @DisplayName("Search again continuely for new results")
+    void searchAgainReturnNewResult() {
+        generateSearchEngineFromInput("e\nagain\n^pizza\nback\n");
+        searchEngine.search();
+
+        String expectedOutput = "Enter search query: " +
+                "Found 3 result: \r\n" +
+                "1. Game\r\n" +
+                "2. John Doe\r\n" +
+                "3. Pizza doe\r\n\r\n" +
+                "[search] Enter action ([number], back, again): " +
+                "Enter search query: " +
+                "Found 2 result: \r\n" +
+                "1. Pizza\r\n" +
+                "2. Pizza doe\r\n\r\n" +
+                "[search] Enter action ([number], back, again): ";
+
+        assertEquals(expectedOutput, outputStream.toString());
     }
 
     @Test
-    @DisplayName("Edit contact will output the correct message")
-    void editContacts() {
+    @DisplayName("Show correct record info on number input")
+    void showContactInfo() {
+        generateSearchEngineFromInput("^Pizza\n2\n");
+        searchEngine.search();
+
+
+        String expectedOutput = "Enter search query: " +
+                "Found 2 result: \r\n" +
+                "1. Pizza\r\n" +
+                "2. Pizza doe\r\n\r\n" +
+                "[search] Enter action ([number], back, again): " +
+                "Name: Pizza\n" +
+                "Surname: doe\n" +
+                "Birth date: 1999-1-1\n" +
+                "Gender: M\n" +
+                "Number: 12\n" +
+                "Time created: ";
+
+        assertTrue(outputStream.toString().startsWith(expectedOutput));
+
     }
 
     private void generateSearchEngineFromInput(String input) {

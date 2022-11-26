@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class ContactPrinter {
-
     public static void printIndexList(List<Contact> contacts) {
         if (contacts.isEmpty()) {
             System.out.println("No records to show!");
@@ -19,7 +18,15 @@ public class ContactPrinter {
     }
 
     public static void printContactInfo(List<Contact> contacts, int i) {
+        if (contacts.isEmpty()) {
+            System.out.println("No records to show!");
+        }
+
+        if (i < 0 || i > contacts.size() - 1) {
+            System.out.println("Incorrect index number");
+            return;
+        }
+
         System.out.println(contacts.get(i).getInfo());
     }
-
 }
