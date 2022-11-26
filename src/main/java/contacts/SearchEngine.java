@@ -51,7 +51,7 @@ public class SearchEngine {
 
         if (input.matches("\\d+")) {
             int index = Integer.parseInt(input) - 1;
-            ContactPrinter.printContactInfo(contacts, index);
+            new ContactEditor(phoneBook, contacts.get(index), scanner);
         }
     }
 }
