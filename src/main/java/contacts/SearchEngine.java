@@ -35,7 +35,7 @@ public class SearchEngine {
         Pattern pattern = Pattern.compile(search, Pattern.CASE_INSENSITIVE);
         return phoneBook.getContacts()
                 .stream()
-                .filter(contact -> pattern.matcher(contact.getFullName()).find())
+                .filter(contact -> pattern.matcher(contact.getInfo()).find())
                 .toList();
     }
 

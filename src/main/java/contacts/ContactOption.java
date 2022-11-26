@@ -32,7 +32,7 @@ public class ContactOption {
                     printContactsCount();
                     break;
                 case "list":
-                    ContactPrinter.printIndexList(phoneBook.getContacts());
+                    listContactOptions();
                     break;
                 case "add":
                     addNewContact();
@@ -58,5 +58,18 @@ public class ContactOption {
 
     private void printContactsCount() {
         System.out.println("The Phone Book has " + phoneBook.getContacts().size() + " records.");
+    }
+
+    private void listContactOptions() {
+        List<Contact> contacts = phoneBook.getContacts();
+        ContactPrinter.printIndexList(contacts);
+
+        System.out.println("[list] Enter action ([number], back): ");
+        String input = scanner.nextLine().toLowerCase();
+
+        if (input.matches("\\d+")) {
+            int index = Integer.parseInt(input) - 1;
+            new ContactEditor(phoneBook, contacts.get(index), scanner);
+        }
     }
 }
