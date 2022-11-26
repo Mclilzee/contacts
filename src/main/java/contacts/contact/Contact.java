@@ -48,6 +48,10 @@ public abstract class Contact implements Serializable {
         return lastEditedDateTime;
     }
 
+    public UUID getId() {
+        return id;
+    }
+
     protected void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
         if (!isValidPhoneNumber(phoneNumber)) {

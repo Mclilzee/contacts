@@ -62,6 +62,18 @@ class ContactTest {
         }
     }
 
+
+    @Test
+    void testContactIdSetOnCreation() {
+        UUID id = UUID.fromString("8ba02d28-2eab-42d5-8afb-ffab3cc0c803");
+        try (MockedStatic<UUID> uuidMock = mockStatic(UUID.class)) {
+            uuidMock.when(UUID::randomUUID).thenReturn(id);
+            Contact firstContact = new ContactMock("1233");
+
+            assertEquals(firstContact.getId(), id);
+        }
+    }
+
     @ParameterizedTest
     @DisplayName("Correct phone number set correctly")
     @MethodSource("provideCorrectPhoneNumbers")
