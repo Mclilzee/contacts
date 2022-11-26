@@ -12,4 +12,8 @@ public class ContactPrinter {
                 .mapToObj(index -> (index + 1) + ". " + contacts.get(index).getFullName())
                 .forEach(System.out::println);
     }
+
+    public static void printContactInfo(List<Contact> contacts, int i) {
+        System.out.println(contacts.get(i).getInfo());
+    }
 }

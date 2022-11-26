@@ -42,4 +42,12 @@ class ContactPrinterTest {
         assertEquals(expected, outputStream.toString());
     }
 
+    @Test
+    void printContactInfo() {
+        ContactPrinter.printContactInfo(contacts, 1);
+
+        String expected = contacts.get(1).getInfo() + "\r\n";
+        assertEquals(expected, outputStream.toString());
+    }
+
 }

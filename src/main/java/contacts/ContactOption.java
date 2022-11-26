@@ -4,10 +4,10 @@ import contacts.contact.Contact;
 import contacts.factory.OrganizationContactFactory;
 import contacts.factory.PersonContactFactory;
 import contacts.phonebook.PhoneBook;
+import contacts.utils.ContactPrinter;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
 public class ContactOption {
 
@@ -63,44 +63,41 @@ public class ContactOption {
         System.out.println("The Phone Book has " + phoneBook.getContacts().size() + " records.");
     }
 
-    private void printContactIndexList() {
-        List<Contact> contacts = phoneBook.getContacts();
-
-    }
-
     private void printContactInfo() {
-        if (phoneBook.getContacts().isEmpty()) {
+        List<Contact> contacts = phoneBook.getContacts();
+        if (contacts.isEmpty()) {
             System.out.println("No records to show!");
             return;
         }
 
-        int index = getContactIndex();
-        String info = phoneBook.getContacts().get(index).getInfo();
-        System.out.println(info);
+        int index = getContactIndex(contacts);
+        ContactPrinter.printContactInfo(contacts, index);
     }
 
     private void editContactsInstructions() {
-        if (phoneBook.getContacts().isEmpty()) {
+        List<Contact> contacts = phoneBook.getContacts();
+        if (contacts.isEmpty()) {
             System.out.println("No records to edit!");
             return;
         }
 
-        phoneBook.editContactInformation(getContactIndex(), scanner);
+        phoneBook.editContactInformation(getContactIndex(contacts), scanner);
         System.out.println("The record updated!");
     }
 
     private void removeContact() {
-        if (phoneBook.getContacts().isEmpty()) {
+        List<Contact> contacts = phoneBook.getContacts();
+        if (contacts.isEmpty()) {
             System.out.println("No records to remove!");
             return;
         }
 
-        phoneBook.removeContact(getContactIndex());
+        phoneBook.removeContact(getContactIndex(contacts));
         System.out.println("The record removed!");
     }
 
-    private int getContactIndex() {
-        printContactIndexList();
+    private int getContactIndex(List<Contact> contacts) {
+        ContactPrinter.printIndexList(contacts);
         System.out.print("Select a record: ");
         return Integer.parseInt(scanner.nextLine()) - 1;
     }
