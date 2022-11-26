@@ -65,9 +65,7 @@ public class ContactOption {
 
     private void printContactIndexList() {
         List<Contact> contacts = phoneBook.getContacts();
-        IntStream.range(0, contacts.size())
-                .mapToObj(index -> (index + 1) + ". " + contacts.get(index).getFullName())
-                .forEach(System.out::println);
+
     }
 
     private void printContactInfo() {

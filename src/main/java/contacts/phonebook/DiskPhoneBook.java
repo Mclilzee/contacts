@@ -1,8 +1,10 @@
 package contacts.phonebook;
 
 import contacts.contact.Contact;
+import contacts.utils.SerializerUtil;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,17 +17,14 @@ public class DiskPhoneBook implements PhoneBook {
 
     @Override
     public void addContact(Contact contact) {
-        try {
-            FileOutputStream outputStream = new FileOutputStream(file, true);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-            objectOutputStream.writeObject(contact);
-        } catch (IOException ignored) {
-        }
+        List<Contact> contacts = new ArrayList<>(SerializerUtil.readContacts(file));
+        contacts.add(contact);
+        SerializerUtil.writeContacts(contacts, file);
     }
 
     @Override
     public List<Contact> getContacts() {
-        return null;
+        return SerializerUtil.readContacts(file);
     }
 
     @Override
