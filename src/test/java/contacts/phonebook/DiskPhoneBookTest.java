@@ -8,33 +8,13 @@ import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DiskPhoneBookTest {
+class DiskPhoneBookTest extends PhoneBookBaseTest {
 
     File file = new File("./src/test/java/contacts/phonebook/test.data");
-    DiskPhoneBook phoneBook = new DiskPhoneBook(file);
 
-    @Test
-    void addContact() {
-        phoneBook.addContact(new OrganizationContact("something", "something" , "123"));
-    }
-
-    @Test
-    void getContacts() {
-    }
-
-    @Test
-    void getContactIndexInformation() {
-    }
-
-    @Test
-    void getContactInformation() {
-    }
-
-    @Test
-    void editContactInformation() {
-    }
-
-    @Test
-    void removeContact() {
+    @Override
+    protected PhoneBook createInstance() {
+        return new DiskPhoneBook(file);
     }
 }
+
