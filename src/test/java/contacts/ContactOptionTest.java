@@ -1,5 +1,6 @@
 package contacts;
 
+import contacts.phonebook.MemoryPhoneBook;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

@@ -1,9 +1,10 @@
 package contacts;
 
 import contacts.contact.Contact;
-import contacts.factory.ContactFactory;
 import contacts.factory.OrganizationContactFactory;
 import contacts.factory.PersonContactFactory;
+import contacts.phonebook.MemoryPhoneBook;
+import contacts.phonebook.PhoneBook;
 
 import java.util.Scanner;
 

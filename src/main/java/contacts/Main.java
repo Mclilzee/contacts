@@ -1,5 +1,8 @@
 package contacts;
 
+import contacts.phonebook.DiskPhoneBook;
+import contacts.phonebook.MemoryPhoneBook;
+
 import java.io.File;
 import java.util.Scanner;
 

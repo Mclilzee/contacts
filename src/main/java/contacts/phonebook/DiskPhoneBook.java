@@ -1,12 +1,12 @@
-package contacts;
+package contacts.phonebook;
 
 import contacts.contact.Contact;
 
-import java.io.File;
+import java.io.*;
 import java.util.List;
 import java.util.Scanner;
 
-public class DiskPhoneBook implements PhoneBook{
+public class DiskPhoneBook implements PhoneBook {
     private final File file;
 
     public DiskPhoneBook(File file) {
@@ -15,7 +15,12 @@ public class DiskPhoneBook implements PhoneBook{
 
     @Override
     public void addContact(Contact contact) {
-
+        try {
+            FileOutputStream outputStream = new FileOutputStream(file, true);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+            objectOutputStream.writeObject(contact);
+        } catch (IOException ignored) {
+        }
     }
 
     @Override

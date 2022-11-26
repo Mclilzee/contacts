@@ -1,9 +1,10 @@
-package contacts;
+package contacts.phonebook;
 
 import contacts.contact.Contact;
 import contacts.contact.OrganizationContact;
 import contacts.contact.Person;
 import contacts.contact.PersonContact;
+import contacts.phonebook.MemoryPhoneBook;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
