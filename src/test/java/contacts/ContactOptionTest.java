@@ -79,32 +79,6 @@ class ContactOptionTest {
         assertEquals(expectedOutput, outputStream.toString());
     }
 
-    @Test
-    @DisplayName("Remove contact when list is empty show correct output")
-    void removeEmptyContact() {
-        generateContactOptionInputs("remove\nexit\n");
-        contactOption.start();
-        String outputExpected = MAIN_INSTRUCTIONS + "No records to remove!\r\n\r\n" + MAIN_INSTRUCTIONS;
-        assertEquals(outputExpected, outputStream.toString());
-    }
-
-    @Test
-    @DisplayName("Remove contact return correct output message")
-    void removeContact() {
-        generateContactOptionInputs(ADDING_PERSON_CONTACT_INPUT + ADDING_ORGANIZATION_CONTACT_INPUT +
-                "remove\n1\nexit\n");
-        contactOption.start();
-
-        String expectedOutput = MAIN_INSTRUCTIONS +
-                ADDING_PERSON_CONTACT_INSTRUCTIONS +
-                ADDING_ORGANIZATION_CONTACT_INSTRUCTIONS +
-                "1. John Doe\r\n" +
-                "2. Pizza Store\r\n" +
-                "Select a record: " +
-                "The record removed!\r\n\r\n" +
-                MAIN_INSTRUCTIONS;
-        assertEquals(expectedOutput, outputStream.toString());
-    }
 
     @Test
     @DisplayName("Counting contacts when list is empty output correct message")
@@ -148,33 +122,6 @@ class ContactOptionTest {
                 "2. John Doe\r\n\r\n" +
                 MAIN_INSTRUCTIONS;
         assertEquals(expectedOutput, outputStream.toString());
-    }
-
-    @Test
-    @DisplayName("Edit empty contact list will output correct message")
-    void editEmptyContacts() {
-        generateContactOptionInputs("edit\nexit\n");
-        contactOption.start();
-        String expectedOutput = MAIN_INSTRUCTIONS + "No records to edit!\r\n\r\n" + MAIN_INSTRUCTIONS;
-        assertEquals(expectedOutput, outputStream.toString());
-    }
-
-    @Test
-    @DisplayName("Edit contact will output the correct message")
-    void editContacts() {
-        generateContactOptionInputs(ADDING_PERSON_CONTACT_INPUT + "edit\n1\nnumber\n123\nexit\n");
-        contactOption.start();
-
-        String expectedOutput = MAIN_INSTRUCTIONS +
-                ADDING_PERSON_CONTACT_INSTRUCTIONS +
-                "1. John Doe\r\n" +
-                "Select a record: " +
-                "Select a field (name, surname, birth, gender, number): " +
-                "Enter number: " +
-                "The record updated!\r\n\r\n" +
-                MAIN_INSTRUCTIONS;
-        assertEquals(expectedOutput, outputStream.toString());
-
     }
 
     private void generateContactOptionInputs(String input) {

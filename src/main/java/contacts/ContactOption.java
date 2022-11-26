@@ -34,12 +34,6 @@ public class ContactOption {
                 case "add":
                     addNewContact();
                     break;
-                case "edit":
-                    editContactsInstructions();
-                    break;
-                case "remove":
-                    removeContact();
-                    break;
             }
             System.out.println();
         }
@@ -61,44 +55,5 @@ public class ContactOption {
 
     private void printContactsCount() {
         System.out.println("The Phone Book has " + phoneBook.getContacts().size() + " records.");
-    }
-
-    private void printContactInfo() {
-        List<Contact> contacts = phoneBook.getContacts();
-        if (contacts.isEmpty()) {
-            System.out.println("No records to show!");
-            return;
-        }
-
-        int index = getContactIndex(contacts);
-        ContactPrinter.printContactInfo(contacts, index);
-    }
-
-    private void editContactsInstructions() {
-        List<Contact> contacts = phoneBook.getContacts();
-        if (contacts.isEmpty()) {
-            System.out.println("No records to edit!");
-            return;
-        }
-
-        phoneBook.editContactInformation(getContactIndex(contacts), scanner);
-        System.out.println("The record updated!");
-    }
-
-    private void removeContact() {
-        List<Contact> contacts = phoneBook.getContacts();
-        if (contacts.isEmpty()) {
-            System.out.println("No records to remove!");
-            return;
-        }
-
-        phoneBook.removeContact(getContactIndex(contacts));
-        System.out.println("The record removed!");
-    }
-
-    private int getContactIndex(List<Contact> contacts) {
-        ContactPrinter.printIndexList(contacts);
-        System.out.print("Select a record: ");
-        return Integer.parseInt(scanner.nextLine()) - 1;
     }
 }
