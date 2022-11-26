@@ -48,4 +48,16 @@ public class SerializerUtilTest {
         assertEquals(contacts.get(1).getFullName(), readContacts.get(1).getFullName());
         assertEquals(contacts.get(2).getFullName(), readContacts.get(2).getFullName());
     }
+
+    @Test
+    void fileOverwriteOldData() {
+        SerializerUtil.writeContacts(contacts, file);
+        Contact contact = new OrganizationContact("Wall", "Street", "2222");
+        SerializerUtil.writeContacts(List.of(contact), file);
+
+        List<Contact> readContacts = SerializerUtil.readContacts(file);
+        assertEquals(1, readContacts.size());
+        assertEquals("Wall", readContacts.get(0).getFullName());
+
+    }
 }
