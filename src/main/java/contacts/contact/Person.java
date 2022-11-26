@@ -3,13 +3,17 @@ package contacts.contact;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
 @Getter @Setter
-public class Person {
+public class Person implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1;
     private static final Pattern genderPattern = Pattern.compile("[MF]", Pattern.CASE_INSENSITIVE);
 
     private String name;

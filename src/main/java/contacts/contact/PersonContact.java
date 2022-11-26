@@ -1,9 +1,12 @@
 package contacts.contact;
 
+import java.io.Serial;
 import java.util.Scanner;
 
 public class PersonContact extends Contact {
 
+    @Serial
+    private static final long serialVersionUID = 1;
     private final Person person;
 
     public PersonContact(Person person, String phoneNumber) {

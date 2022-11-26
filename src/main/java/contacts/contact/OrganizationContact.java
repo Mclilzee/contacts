@@ -1,10 +1,13 @@
 package contacts.contact;
 
+import java.io.Serial;
 import java.util.Scanner;
 
 public class OrganizationContact extends Contact {
 
-    private String organizationName;
+    @Serial
+    private static final long serialVersionUID = 1;
+    private final String organizationName;
     private String address;
 
     public OrganizationContact(String organizationName, String address, String phoneNumber) {

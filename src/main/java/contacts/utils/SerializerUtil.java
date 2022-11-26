@@ -17,12 +17,12 @@ public class SerializerUtil {
         }
     }
 
-    public static Optional<List<Contact>> readContacts(File file) {
+    public static List<Contact> readContacts(File file) {
         try (ObjectInputStream inputStream = new ObjectInputStream(
                 new BufferedInputStream(new FileInputStream(file)))) {
-            return Optional.ofNullable((List<Contact>) inputStream.readObject());
+            return (List<Contact>) inputStream.readObject();
         } catch (IOException | ClassNotFoundException ex) {
-            return Optional.empty();
+            return List.of();
         }
     }
 }

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SerializerUtilTest {
@@ -33,17 +34,18 @@ public class SerializerUtilTest {
     }
 
     @Test
+    void getEmptyListIfNoDataExists() {
+        List<Contact> readContact = SerializerUtil.readContacts(file);
+        assertTrue(readContact.isEmpty());
+    }
+
+    @Test
     void fileContainsCorrectInformation() {
+        SerializerUtil.writeContacts(contacts, file);
+        List<Contact> readContacts = SerializerUtil.readContacts(file);
 
-    }
-
-    @Test
-    void fileContainsNoInformation() {
-
-    }
-
-    @Test
-    void containCorrectObjects() {
-
+        assertEquals(contacts.get(0).getFullName(), readContacts.get(0).getFullName());
+        assertEquals(contacts.get(1).getFullName(), readContacts.get(1).getFullName());
+        assertEquals(contacts.get(2).getFullName(), readContacts.get(2).getFullName());
     }
 }

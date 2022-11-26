@@ -1,11 +1,11 @@
 package contacts.contact;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public abstract class Contact {
-
+public abstract class Contact implements Serializable {
     private static final Pattern pattern;
 
     static {
@@ -16,7 +16,7 @@ public abstract class Contact {
         pattern = Pattern.compile(fullRegex, Pattern.CASE_INSENSITIVE);
     }
     private String phoneNumber;
-    private final LocalDateTime createdDateTime;
+    private LocalDateTime createdDateTime;
     private LocalDateTime lastEditedDateTime;
 
     public Contact(String phoneNumber) {
@@ -31,6 +31,8 @@ public abstract class Contact {
             System.out.println("Wrong number format!");
         }
     }
+
+    public Contact() {}
 
     public String getPhoneNumber() {
         return phoneNumber;
