@@ -2,15 +2,12 @@ package contacts.phonebook;
 
 import contacts.contact.Contact;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class MemoryPhoneBook implements PhoneBook {
 
-    private final List<Contact> contacts = new ArrayList<>();
+    private List<Contact> contacts = new ArrayList<>();
 
     @Override
     public void addContact(Contact contact) {
@@ -32,7 +29,9 @@ public class MemoryPhoneBook implements PhoneBook {
     }
 
     @Override
-    public void removeContact(int index) {
-        contacts.remove(index);
+    public void removeContact(Contact contact) {
+        contacts = contacts.stream()
+                .filter(element -> !Objects.equals(contact, element))
+                .toList();
     }
 }

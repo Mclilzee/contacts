@@ -88,10 +88,11 @@ class DiskPhoneBookTest {
     @Test
     void removeContact() {
         Contact contact = new OrganizationContact("Pizza Store", "Wall str 1", "123");
+        Contact secondContact = new OrganizationContact("Pizza Store", "Wall str 1", "123");
         phoneBook.addContact(contact);
-        phoneBook.addContact(contact);
+        phoneBook.addContact(secondContact);
 
-        phoneBook.removeContact(1);
+        phoneBook.removeContact(secondContact);
 
         List<Contact> contacts = phoneBook.getContacts();
         int expected = 1;
@@ -101,10 +102,12 @@ class DiskPhoneBookTest {
     @Test
     void removedContactPersistInDatabase() {
         Contact contact = new OrganizationContact("Pizza Store", "Wall str 1", "123");
+        Contact secondContact = new OrganizationContact("Pizza Store", "Wall str 1", "123");
         phoneBook.addContact(contact);
-        phoneBook.addContact(contact);
+        phoneBook.addContact(secondContact);
 
-        phoneBook.removeContact(1);
+
+        phoneBook.removeContact(secondContact);
         phoneBook = new DiskPhoneBook(file);
 
         List<Contact> contacts = phoneBook.getContacts();

@@ -6,6 +6,7 @@ import contacts.utils.SerializerUtil;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class DiskPhoneBook implements PhoneBook {
@@ -35,9 +36,11 @@ public class DiskPhoneBook implements PhoneBook {
     }
 
     @Override
-    public void removeContact(int index) {
-        List<Contact> contacts = SerializerUtil.readContacts(file);
-        contacts.remove(index);
+    public void removeContact(Contact contact) {
+        List<Contact> contacts = SerializerUtil.readContacts(file).stream()
+                .filter(element -> !Objects.equals(contact, element))
+                .toList();
+
         SerializerUtil.writeContacts(contacts, file);
     }
 }

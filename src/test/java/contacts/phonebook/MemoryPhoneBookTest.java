@@ -65,11 +65,15 @@ class MemoryPhoneBookTest {
 
     @Test
     void removeContact() {
-        phonebook.addContact(new PersonContact(new Person("John", "Doe", "1993-12-12", "M"),
-                "+0 (123) 12345"));
-        phonebook.addContact(new OrganizationContact("Pizza Shop", "Wall St. 1", "+0 (123) 12345"));
-        phonebook.addContact(new OrganizationContact("Game Store", "Gnarren Str. 15", "+0 (123) 12345"));
-        phonebook.removeContact(0);
+        PersonContact firstContact = new PersonContact(new Person("John", "Doe", "1993-12-12", "M"),
+                "+0 (123) 12345");
+        OrganizationContact secondContact = new OrganizationContact("Pizza Shop", "Wall St. 1", "+0 (123) 12345");
+        OrganizationContact thirdContact = new OrganizationContact("Game Store", "Gnarren Str. 15", "+0 (123) 12345");
+        phonebook.addContact(firstContact);
+        phonebook.addContact(secondContact);
+        phonebook.addContact(thirdContact);
+
+        phonebook.removeContact(secondContact);
 
         int expected = 2;
         assertEquals(expected, phonebook.getContacts().size());
@@ -77,11 +81,16 @@ class MemoryPhoneBookTest {
 
     @Test
     void removeCorrectContact() {
-        phonebook.addContact(new PersonContact(new Person("John", "Doe", "1993-12-12", "M"),
-                "+0 (123) 12345"));
-        phonebook.addContact(new OrganizationContact("Pizza Shop", "Wall St. 1", "+0 (123) 12345"));
-        phonebook.addContact(new OrganizationContact("Game Store", "Gnarren Str. 15", "+0 (123) 12345"));
-        phonebook.removeContact(0);
+        PersonContact firstContact = new PersonContact(new Person("John", "Doe", "1993-12-12", "M"),
+                "+0 (123) 12345");
+        OrganizationContact secondContact = new OrganizationContact("Pizza Shop", "Wall St. 1", "+0 (123) 12345");
+        OrganizationContact thirdContact = new OrganizationContact("Game Store", "Gnarren Str. 15", "+0 (123) 12345");
+
+        phonebook.addContact(firstContact);
+        phonebook.addContact(secondContact);
+        phonebook.addContact(thirdContact);
+
+        phonebook.removeContact(firstContact);
 
         String expected = "Pizza Shop";
         assertEquals(expected, phonebook.getContacts().get(0).getFullName());

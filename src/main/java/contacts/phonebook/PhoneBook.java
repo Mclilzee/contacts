@@ -13,5 +13,5 @@ public interface PhoneBook {
 
     void editContactInformation(int i, Scanner scanner);
 
-    void removeContact(int index);
+    void removeContact(Contact contact);
 }
