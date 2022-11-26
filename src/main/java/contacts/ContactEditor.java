@@ -37,7 +37,8 @@ public class ContactEditor {
 
     private void editContactsInstructions() {
         phoneBook.editContactInformation(contact, scanner);
-        System.out.println("The record updated!");
+        System.out.println("Saved");
+        System.out.println(contact.getInfo());
     }
 
     private void removeContact() {

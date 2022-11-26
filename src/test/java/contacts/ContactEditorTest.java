@@ -23,6 +23,7 @@ class ContactEditorTest {
     OrganizationContact firstContact = new OrganizationContact("Pizza", "Str", "123");
     OrganizationContact secondContact = new OrganizationContact("Game", "Str", "123");
     PersonContact thirdContact = new PersonContact(new Person("John", "Doe", "1999-1-1", "m"), "12");
+
     static ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
     @BeforeAll
@@ -74,6 +75,29 @@ class ContactEditorTest {
         int expected = -1;
 
         assertEquals(expected, phoneBook.getContacts().indexOf(secondContact));
+    }
+
+    @Test
+    void editRecordOutputCorrectMessages() {
+        String oldInfo = firstContact.getInfo();
+        generateContactEditorWithInput("edit\nname\nDoblos store\nmenu", firstContact);
+
+        String expected = oldInfo + "\r\n" +
+                "[record] Enter action (edit, delete, menu): " +
+                "Select a field (name, address, number): " +
+                "Enter name: " +
+                "Saved\r\n" +
+                firstContact.getInfo() + "\r\n" +
+                "[record] Enter action (edit, delete, menu): ";
+        assertEquals(expected, outputStream.toString());
+    }
+
+    @Test
+    void correctContactEdited() {
+        generateContactEditorWithInput("edit\nname\nDoblos store\nmenu", firstContact);
+
+        String expected = "Doblos store";
+        assertEquals(expected, firstContact.getFullName());
     }
 
     void generateContactEditorWithInput(String input, Contact contact) {

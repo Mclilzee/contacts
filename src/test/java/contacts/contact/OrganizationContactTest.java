@@ -11,13 +11,14 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mockStatic;
 
 class OrganizationContactTest {
 
     private OrganizationContact organizationContact = new OrganizationContact("Pizza store", "Gnar Str. 11", "12345");
     private Scanner scanner = new Scanner("");
+
+    String SELECT_FIELD_MESSAGE = "Select a field (name, address, number): ";
 
     private static final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
@@ -72,7 +73,7 @@ class OrganizationContactTest {
         scanner = new Scanner("\n");
         organizationContact.editInformation(scanner);
 
-        String output = getSelectFieldMessage();
+        String output = SELECT_FIELD_MESSAGE;
         assertEquals(output, outputStream.toString());
     }
 
@@ -83,7 +84,7 @@ class OrganizationContactTest {
         String expected = "Berlin Str. 20";
         assertEquals(expected, organizationContact.getAddress());
 
-        String output = getSelectFieldMessage() + "Enter address: ";
+        String output = SELECT_FIELD_MESSAGE + "Enter address: ";
         assertEquals(output, outputStream.toString());
     }
 
@@ -94,7 +95,7 @@ class OrganizationContactTest {
         String expected = "Berlin Str. 20";
         assertEquals(expected, organizationContact.getAddress());
 
-        String output = getSelectFieldMessage() + "Enter address: ";
+        String output = SELECT_FIELD_MESSAGE + "Enter address: ";
         assertEquals(output, outputStream.toString());
     }
 
@@ -105,7 +106,7 @@ class OrganizationContactTest {
         String expected = "123";
         assertEquals(expected, organizationContact.getPhoneNumber());
 
-        String output = getSelectFieldMessage() + "Enter number: ";
+        String output = SELECT_FIELD_MESSAGE + "Enter number: ";
         assertEquals(output, outputStream.toString());
     }
 
@@ -116,11 +117,7 @@ class OrganizationContactTest {
         String expected ="Game Store";
         assertEquals(expected, organizationContact.getFullName());
 
-        String output = getSelectFieldMessage() + "Enter name: ";
+        String output = SELECT_FIELD_MESSAGE + "Enter name: ";
         assertEquals(output, outputStream.toString());
-    }
-
-    private static String getSelectFieldMessage() {
-        return "Select a field (address, number): ";
     }
 }

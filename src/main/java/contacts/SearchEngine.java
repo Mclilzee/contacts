@@ -17,6 +17,7 @@ public class SearchEngine {
     public SearchEngine(PhoneBook phoneBook, Scanner scanner) {
         this.phoneBook = phoneBook;
         this.scanner = scanner;
+        search();
     }
 
     public void search() {

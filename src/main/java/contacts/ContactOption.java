@@ -25,6 +25,9 @@ public class ContactOption {
             switch (scanner.nextLine().toLowerCase()) {
                 case "exit":
                     return;
+                case "search":
+                    new SearchEngine(phoneBook, scanner);
+                    break;
                 case "count":
                     printContactsCount();
                     break;
