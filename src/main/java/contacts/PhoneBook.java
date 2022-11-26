@@ -2,43 +2,20 @@ package contacts;
 
 import contacts.contact.Contact;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
-public class PhoneBook {
+public interface PhoneBook {
 
-    private final List<Contact> contacts = new ArrayList<>();
+    void addContact(Contact contact);
 
-    public void addContact(Contact contact) {
-        if (contact == null) {
-            throw new IllegalArgumentException();
-        }
+    List<Contact> getContacts();
 
-        contacts.add(contact);
-    }
+    List<String> getContactIndexInformation();
 
-    public List<Contact> getContacts() {
-        return Collections.unmodifiableList(contacts);
-    }
+    String getContactInformation(int index);
 
-    public List<String> getContactIndexInformation() {
-        return IntStream.range(0, contacts.size())
-                .mapToObj(index -> (index + 1) + ". " + contacts.get(index).getFullName())
-                .toList();
-    }
+    void editContactInformation(int i, Scanner scanner);
 
-    public String getContactInformation(int index) {
-        return contacts.get(index).getInfo();
-    }
-
-    public void editContactInformation(int i, Scanner scanner) {
-        contacts.get(i).editContact(scanner);
-    }
-
-    public void removeContact(int index) {
-        contacts.remove(index);
-    }
+    void removeContact(int index);
 }

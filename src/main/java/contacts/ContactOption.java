@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class ContactOption {
 
-    private final PhoneBook phoneBook = new PhoneBook();
+    private final PhoneBook memoryPhoneBook = new MemoryPhoneBook();
     private final ContactFactory personFactory;
     private final ContactFactory organizationFactory;
     private final Scanner scanner;
@@ -56,46 +56,46 @@ public class ContactOption {
             contact = organizationFactory.createContact();
         }
 
-        phoneBook.addContact(contact);
+        memoryPhoneBook.addContact(contact);
         System.out.println("The record added.");
     }
 
     private void printContactsCount() {
-        System.out.println("The Phone Book has " + phoneBook.getContacts().size() + " records.");
+        System.out.println("The Phone Book has " + memoryPhoneBook.getContacts().size() + " records.");
     }
 
     private void printContactIndexList() {
-        phoneBook.getContactIndexInformation().forEach(System.out::println);
+        memoryPhoneBook.getContactIndexInformation().forEach(System.out::println);
     }
 
     private void printContactInfo() {
-        if (phoneBook.getContacts().isEmpty()) {
+        if (memoryPhoneBook.getContacts().isEmpty()) {
             System.out.println("No records to show!");
             return;
         }
 
         int index = getContactIndex();
-        String info = phoneBook.getContactInformation(index);
+        String info = memoryPhoneBook.getContactInformation(index);
         System.out.println(info);
     }
 
     private void editContactsInstructions() {
-        if (phoneBook.getContacts().isEmpty()) {
+        if (memoryPhoneBook.getContacts().isEmpty()) {
             System.out.println("No records to edit!");
             return;
         }
 
-        phoneBook.editContactInformation(getContactIndex(), scanner);
+        memoryPhoneBook.editContactInformation(getContactIndex(), scanner);
         System.out.println("The record updated!");
     }
 
     private void removeContact() {
-        if (phoneBook.getContacts().isEmpty()) {
+        if (memoryPhoneBook.getContacts().isEmpty()) {
             System.out.println("No records to remove!");
             return;
         }
 
-        phoneBook.removeContact(getContactIndex());
+        memoryPhoneBook.removeContact(getContactIndex());
         System.out.println("The record removed!");
     }
 
