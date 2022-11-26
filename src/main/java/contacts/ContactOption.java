@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class ContactOption {
 
-    private PhoneBook memoryPhoneBook = new MemoryPhoneBook();
+    private PhoneBook memoryPhoneBook;
     private final Scanner scanner;
 
     public ContactOption(Scanner scanner, PhoneBook phoneBook) {
