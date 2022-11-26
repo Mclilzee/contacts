@@ -9,15 +9,12 @@ import java.util.Scanner;
 
 public class ContactOption {
 
-    private final PhoneBook memoryPhoneBook = new MemoryPhoneBook();
-    private final ContactFactory personFactory;
-    private final ContactFactory organizationFactory;
+    private PhoneBook memoryPhoneBook = new MemoryPhoneBook();
     private final Scanner scanner;
 
-    public ContactOption(Scanner scanner) {
+    public ContactOption(Scanner scanner, PhoneBook phoneBook) {
         this.scanner = scanner;
-        this.personFactory = new PersonContactFactory(scanner);
-        this.organizationFactory = new OrganizationContactFactory(scanner);
+        this.memoryPhoneBook = phoneBook;
     }
 
     public void start() {
@@ -51,9 +48,9 @@ public class ContactOption {
         String type = scanner.nextLine().toLowerCase();
         Contact contact;
         if ("person".equals(type)) {
-            contact = personFactory.createContact();
+            contact = new PersonContactFactory(scanner).createContact();
         } else {
-            contact = organizationFactory.createContact();
+            contact = new OrganizationContactFactory(scanner).createContact();
         }
 
         memoryPhoneBook.addContact(contact);

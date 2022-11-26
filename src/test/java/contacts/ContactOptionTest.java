@@ -179,6 +179,6 @@ class ContactOptionTest {
     }
 
     private void generateContactOptionInputs(String input) {
-        contactOption = new ContactOption(new Scanner(input));
+        contactOption = new ContactOption(new Scanner(input), new MemoryPhoneBook());
     }
 }
