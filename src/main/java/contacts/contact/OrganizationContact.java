@@ -7,7 +7,7 @@ public class OrganizationContact extends Contact {
 
     @Serial
     private static final long serialVersionUID = 1;
-    private final String organizationName;
+    private String organizationName;
     private String address;
 
     public OrganizationContact(String organizationName, String address, String phoneNumber) {
@@ -41,6 +41,7 @@ public class OrganizationContact extends Contact {
         switch (scanner.nextLine().toLowerCase()) {
             case "address" -> editAddress(scanner);
             case "number" -> editPhoneNumber(scanner);
+            case "name" -> editName(scanner);
         }
     }
 
@@ -52,5 +53,10 @@ public class OrganizationContact extends Contact {
     private void editAddress(Scanner scanner) {
         System.out.print("Enter address: ");
         address = scanner.nextLine();
+    }
+
+    private void editName(Scanner scanner) {
+        System.out.print("Enter name: ");
+        organizationName = scanner.nextLine();
     }
 }

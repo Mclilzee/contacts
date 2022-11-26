@@ -109,6 +109,17 @@ class OrganizationContactTest {
         assertEquals(output, outputStream.toString());
     }
 
+    @Test
+    void editName() {
+        scanner = new Scanner("name\nGame Store\n");
+        organizationContact.editInformation(scanner);
+        String expected ="Game Store";
+        assertEquals(expected, organizationContact.getFullName());
+
+        String output = getSelectFieldMessage() + "Enter name: ";
+        assertEquals(output, outputStream.toString());
+    }
+
     private static String getSelectFieldMessage() {
         return "Select a field (address, number): ";
     }
