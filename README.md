@@ -27,4 +27,101 @@ This application uses java serialization and deserialization API.
 Follow instruction in terminal to print out, add, remove and update contacts.
 Make sure to provide a file in command-line argument if you want any changes to your contacts to persist.
 
-# Example 1
+# Example Adding
+```
+$ java -jar contacts-1.0.jar contacts.data
+[menu] Enter action (add, list, search, count, exit): add
+Enter the type (person, organization): person
+Enter the name: Emad
+Enter the surname: Ali
+Enter the birth date: 1989-10-01
+Enter the gender: m
+Enter the number: +49 232 11 232
+The record added.
+
+[menu] Enter action (add, list, search, count, exit): add
+Enter the type (person, organization): person
+Enter the name: Ali
+Enter the surname: Ali
+Enter the birth date: 2015-2-1
+Enter the gender: m
+Enter the number: +02 222 222
+The record added.
+```
+# Example Counting
+```
+[menu] Enter action (add, list, search, count, exit): count
+The Phone Book has 2 records.
+```
+
+# Example Listing
+```
+[menu] Enter action (add, list, search, count, exit): list
+1. Emad Ali
+2. Ali Ali
+[list] Enter action ([number], back):
+2
+Name: Ali
+Surname: Ali
+Birth date: 2015-2-1
+Gender: M
+Number: +02 222 222
+Time created: 2023-03-08T14:34:47
+Time last edit: 2023-03-08T14:34:47
+```
+
+# Example Editing
+```
+[record] Enter action (edit, delete, menu): edit
+Select a field (name, surname, birth, gender, number): name
+Enter name: Jake
+Saved
+Name: Ali
+Surname: Ali
+Birth date: 2015-2-1
+Gender: M
+Number: +02 222 222
+Time created: 2023-03-08T14:34:47
+Time last edit: 2023-03-08T14:34:47
+
+[record] Enter action (edit, delete, menu): menu
+
+[menu] Enter action (add, list, search, count, exit): list
+1. Emad Ali
+2. Jake Ali
+[list] Enter action ([number], back):
+2
+Name: Jake
+Surname: Ali
+Birth date: 2015-2-1
+Gender: M
+Number: +02 222 222
+Time created: 2023-03-08T14:34:47
+Time last edit: 2023-03-08T14:35:15
+```
+# Example Searching
+```
+[menu] Enter action (add, list, search, count, exit): search
+Enter search query: Ali
+Found 2 result:
+1. Emad Ali
+2. Jake Ali
+
+[search] Enter action ([number], back, again): again
+Enter search query: 2015
+Found 1 result:
+1. Jake Ali
+```
+# Data will auto save when file provided as command-line argument
+```
+[menu] Enter action (add, list, search, count, exit): exit
+
+$ java -jar contacts-1.0.jar contacts.data
+[menu] Enter action (add, list, search, count, exit): list
+1. Emad Ali
+2. Jake Ali
+[list] Enter action ([number], back):
+back
+
+[menu] Enter action (add, list, search, count, exit): exit
+```
