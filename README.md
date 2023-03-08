@@ -4,6 +4,9 @@
 
 A contact system to manage, add, search, edit and remove contacts. It has Two different functioning contact manager. 
 
+One functionality is to do a test run in memory contacts, without having any persistent data. The data will be wiped every restart of the program.
+Providing a file will make all your data persist and can be saved and loaded on command.
+
 # Build project from scratch - Requires Maven
 - Require Maven building tools <a href="https://maven.apache.org/install.html">Maven Installing Instructions</a>
 - Start by building the project with `mvn package`
@@ -20,5 +23,8 @@ Note: If file does not already exist, it will be created.
 This application uses java serialization and deserialization API.
 
 # Usage Commands
+
+Follow instruction in terminal to print out, add, remove and update contacts.
+Make sure to provide a file in command-line argument if you want any changes to your contacts to persist.
 
 # Example 1
