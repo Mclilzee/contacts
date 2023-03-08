@@ -9,8 +9,8 @@ The first way to launch the application is to provide no command-line arguments.
 
 The second way to launch the program is to provide a Command-line argument of the file type to load contacts from and save contacts to. 
 
-- Launching without arguments: `mvn compile exec:java -Dexec.mainClass="contacts.Main"`
-- Launching with file argument: `mvn compile exec:java -Dexec.mainClass="contacts.Main"`
+- Launching without arguments: `mvn compile exec:java`
+- Launching with file argument: `mvn compile exec:java -Dexec.arguments="File path"` If file does not already exist, it will be created.
 
 
 Note: the application uses java serialization and deserialization API.
