@@ -7,13 +7,13 @@ A contact system to manage, add, search, edit and remove contacts. It has Two di
 One functionality is to do a test run in memory contacts, without having any persistent data. The data will be wiped every restart of the program.
 Providing a file will make all your data persist and can be saved and loaded on command.
 
+# Pre-build projects - Does not require Maven
+- <a href="./release/contacts-1.0.jar">Download Jar</a>
+
 # Build project from scratch - Requires Maven
 - Require Maven building tools <a href="https://maven.apache.org/install.html">Maven Installing Instructions</a>
 - Start by building the project with `mvn package`
 - Navigate to `./target/` directory
-
-# Pre-build projects - Does not require Maven
-- <a href="./release/contacts-1.0.jar">Download Jar</a>
 
 # Launching Project
 - Launching without arguments: `java -jar contacts-1.0.jar` normal functionality except for persistent data, the data used in Memory contacts will be wiped upon exiting the program.
