@@ -1,7 +1,7 @@
 # Contacts Managment
 
-- Require Maven building tools
-- Require Java 17+ 
+- Require Java version 17+ <a href="https://www.oracle.com/de/java/technologies/downloads/">Java download Link</a>
+- Require Maven building tools <a href="https://maven.apache.org/install.html">Maven Installing Instructions</a>
 
 A contact system to manage, add, search, edit and remove contacts. It has Two different functioning contact manager. 
 
