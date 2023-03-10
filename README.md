@@ -50,7 +50,7 @@ The Phone Book has 2 records.
 ```
 
 # Example Listing
-```
+```console
 [menu] Enter action (add, list, search, count, exit): list
 1. Emad Ali
 2. Ali Ali
