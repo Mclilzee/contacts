@@ -23,7 +23,7 @@ Follow instruction in terminal to print out, add, remove and update contacts.
 Make sure to provide a file in command-line argument if you want any changes to your contacts to persist.
 
 # Example Adding
-```
+```console
 $ java -jar contacts-1.0.jar contacts.data
 [menu] Enter action (add, list, search, count, exit): add
 Enter the type (person, organization): person
@@ -44,7 +44,7 @@ Enter the number: +02 222 222
 The record added.
 ```
 # Example Counting
-```
+```console
 [menu] Enter action (add, list, search, count, exit): count
 The Phone Book has 2 records.
 ```
@@ -66,7 +66,7 @@ Time last edit: 2023-03-08T14:34:47
 ```
 
 # Example Editing
-```
+```console
 [record] Enter action (edit, delete, menu): edit
 Select a field (name, surname, birth, gender, number): name
 Enter name: Jake
@@ -95,7 +95,7 @@ Time created: 2023-03-08T14:34:47
 Time last edit: 2023-03-08T14:35:15
 ```
 # Example Searching
-```
+```console
 [menu] Enter action (add, list, search, count, exit): search
 Enter search query: Ali
 Found 2 result:
@@ -108,7 +108,7 @@ Found 1 result:
 1. Jake Ali
 ```
 # Data will auto save when file provided as command-line argument
-```
+```console
 [menu] Enter action (add, list, search, count, exit): exit
 
 $ java -jar contacts-1.0.jar contacts.data
